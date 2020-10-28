@@ -1,20 +1,20 @@
-const setToken = () => {
-  wx.setStorage({
-    key: 'ACCESS_TOKEN',
-    data: ''
+const setToken = (key, data) => {
+  wx.setStorageSync({
+    key: key,
+    data: data
   })
 }
-const getToken = () => {
-  wx.getStorage({
-    key: 'ACCESS_TOKEN',
+const getToken = (key) => {
+  wx.getStorageSync({
+    key: key,
     success (res) {
       console.log(res.data)
     }
   })
 }
-const removeToken = () => {
-  wx.removeStorage({
-    key: 'ACCESS_TOKEN',
+const removeToken = (key) => {
+  wx.removeStorageSync({
+    key: key,
     success (res) {
       console.log(res)
     }

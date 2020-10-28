@@ -1,11 +1,11 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#FFE7CF",
     "navigationBarTitleText": "校园跑跑",
     "navigationBarTextStyle":"black"
   },

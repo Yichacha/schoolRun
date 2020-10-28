@@ -1,10 +1,10 @@
+const app = getApp()
 import { getToken, setToken, removeToken } from '../utils/cookies.js'
 
 const baseUrl = '';
 
 const request = (url, options) => {
-  // var token = getToken();
-  var token = getToken;
+  var token = getToken(app.globalData.token);
   var header = {};
   if(!token){
     header = {
@@ -22,7 +22,7 @@ const request = (url, options) => {
       url: baseUrl + url,
       data: options.data,
       method: options.method,
-      header: header,
+      header: Object.assign(header, options.header),
       success: res => {
         if(res.data.code){
           resolve(res.data);
@@ -37,17 +37,17 @@ const request = (url, options) => {
   })
 }
 
-const getAction = (url, options={}) => {
-  return request(url, {method: 'GET', data: options})
+const getAction = (url, options = {}, header = {}) => {
+  return request(url, {method: 'GET', data: options, header: header})
 }
-const postAction = (url, options) => {
-  return request(url, {methods: 'POST', data: options})
+const postAction = (url, options, header = {}) => {
+  return request(url, {method: 'POST', data: options, header: header})
 }
-const putAction = (url, options) => {
-  return request(url, {methods: 'PUT', data: options});
+const putAction = (url, options, header = {}) => {
+  return request(url, {method: 'PUT', data: options, header: header});
 }
-const deleteAction = (url, options) => {
-  return request(url, {method: 'DELETE', data: options});
+const deleteAction = (url, options, header = {}) => {
+  return request(url, {method: 'DELETE', data: options, header: header});
 }
 
 module.exports = {
