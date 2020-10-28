@@ -1,8 +1,80 @@
-.log-list {
+.login {
+  height: 100vh;
+  position: relative;
+  background-color: #FFF8F1;
+}
+
+.login .login_container {
+  background-color: #FFE7CF;
+  width: 1200rpx;
+  height: 900rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: -600rpx;
+  left: -400rpx;
+}
+.login .login_container .login_txt {
+  position: absolute;
+  bottom: 80rpx;
+  right: 450rpx;
+  color: #FFFFFF;
+  opacity: 0.57;
+  font: 500 100rpx 'Segoe UI';
+}
+
+.login .input_container {
+  padding: 350rpx 140rpx;
+}
+
+.login .input_container view {
+  margin-bottom: 80rpx;
+  position: relative;
+}
+.login .input_container text {
+  position: absolute;
+  top: 0;
+  transition: top .3s ease;
+  font: 200 28rpx 'Segoe UI';
+  line-height: 38rpx;
+  color: #BBBBBB;
+}
+.login .input_container .float {
+  transition: top .3s ease;
+  top: -50rpx;
+}
+.login .input_container input {
+  color: #666666;
+  font-size: 28rpx;
+  width: 100%;
+  border-bottom: 2rpx solid #FFCD9B;
+}
+.login .input_container button {
+  width: 420rpx;
+  height: 86rpx;
+  color: #FFFFFF;
+  background-color: #FCA44B;
+  border-radius: 54rpx;
+  font: 500 36rpx 'Segoe UI';
+  line-height: 86rpx;
+}
+.login .input_container image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  width: 40rpx;
+  height: 40rpx;
+}
+.login .input_container .code_container {
   display: flex;
   flex-direction: column;
-  padding: 40rpx;
 }
-.log-item {
-  margin: 10rpx;
+.login .input_container .code_container .code {
+  margin-bottom: 0;
+  width: 300rpx;
+}
+.login .input_container .code_img {
+  /* flex: 1; */
+  /* height: 80rpx; */
+  width: 150rpx;
 }

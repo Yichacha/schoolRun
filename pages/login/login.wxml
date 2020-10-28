@@ -1,7 +1,24 @@
-<!--logs.wxml-->
-<view class="container log-list">
-  <!-- <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block> -->
-  <text>登录页面</text>
+<view class="login">
+  <view class="login_container">
+    <text class="login_txt">Log In</text>
+  </view>
+  <view class="input_container">
+    <view class="sno">
+      <text class="{{ snoIsFoucs ? 'sno_txt float' : 'sno_txt' }}">学号</text>
+      <input class="sno_input" bindfocus="snoFoucs" bindblur="snoBlur"></input>
+    </view>
+    <view class="pwd_container">
+      <text class="{{ pwdIsFoucs ? 'pwd_txt float' : 'pwd_txt' }}">{{ pwdIsFoucs ? '密码' : '密码（初始密码为身份证后六位）' }}</text>
+      <input type="{{ showPwd ? 'text' : 'password' }}" class="pwd_input" bindfocus="pwdFoucs" bindblur="pwdBlur" bindinput="inputPwd"></input>
+      <image wx:if="{{ inputPwd }}" src="{{ showPwd ? hiddenImg : showImg }}" bindtap="showHidden"></image>
+    </view>
+    <view class="code_container">
+      <view class="code">
+        <text class="{{ codeIsFoucs ? 'code_txt float' : 'code_txt' }}">验证码</text>
+        <input class="code_input" bindfocus="codeFoucs" bindblur="codeBlur"></input>
+      </view>
+      <image class="code_img" src="{{ codeImg }}" bindtap="updateCode"></image>
+    </view>
+    <button bindtap="login">登录</button>
+  </view>
 </view>
