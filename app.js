@@ -3,6 +3,7 @@ App({
   globalData: {
     userInfo: null,
     baseUrl: '',
-    token: 'ACCESS_TOKEN'
+    token: 'ACCESS_TOKEN',
+    tabatActive: ''
   }
 })

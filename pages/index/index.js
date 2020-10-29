@@ -4,10 +4,9 @@ import { getToken } from '../../utils/cookies.js'
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   //事件处理函数
   bindViewTap: function() {
@@ -47,12 +46,13 @@ Page({
         })
       }
    
-    } else {
-      // 跳转到登录页面
-      wx.redirectTo({
-        url: '../login/login'
-      })
     }
+    //  else {
+    //   // 跳转到登录页面
+    //   wx.redirectTo({
+    //     url: '../login/login'
+    //   })
+    // }
   },
   // 获取用户信息
   getUserInfo: function(e) {
@@ -62,5 +62,6 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
 })
