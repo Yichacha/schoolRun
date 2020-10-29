@@ -18,16 +18,18 @@ const request = (url, options) => {
   }
 
   return new Promise((resolve, reject) => {
+    console.log(options.responseType)
     wx.request({
       url: baseUrl + url,
       data: options.data,
       method: options.method,
       header: Object.assign(header, options.header),
+      responseType: options.responseType || "text",
       success: res => {
-        if(res.data.code){
-          resolve(res.data);
+        if(res.data){
+          resolve(res);
         } else{
-          reject(res.data);
+          reject(res);
         }
       },
       fail: err => {
@@ -37,17 +39,49 @@ const request = (url, options) => {
   })
 }
 
-const getAction = (url, options = {}, header = {}) => {
-  return request(url, {method: 'GET', data: options, header: header})
+const getAction = (url, options = {}, header = {}, responseType = '') => {
+  return request(
+    url,
+    {
+      method: 'GET',
+      data: options,
+      header: header,
+      responseType: responseType
+    }
+  )
 }
-const postAction = (url, options, header = {}) => {
-  return request(url, {method: 'POST', data: options, header: header})
+const postAction = (url, options, header = {}, responseType = '') => {
+  return request(
+    url,
+    {
+      method: 'POST',
+      data: options,
+      header: header,
+      responseType: responseType
+    }
+  )
 }
-const putAction = (url, options, header = {}) => {
-  return request(url, {method: 'PUT', data: options, header: header});
+const putAction = (url, options, header = {}, responseType = '') => {
+  return request(
+    url,
+    {
+      method: 'PUT',
+      data: options,
+      header: header,
+      responseType: responseType
+    }
+  )
 }
-const deleteAction = (url, options, header = {}) => {
-  return request(url, {method: 'DELETE', data: options, header: header});
+const deleteAction = (url, options, header = {}, responseType = '') => {
+  return request(
+    url,
+    {
+      method: 'DELETE',
+      data: options,
+      header: header,
+      responseType: responseType
+    }
+  )
 }
 
 module.exports = {
