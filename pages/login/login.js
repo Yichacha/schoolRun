@@ -17,16 +17,15 @@ Page({
     codeIsFocus: false,
     showPwd: false,
     pwdExist: false,
-    hiddenImg: '../../asstes/images/hidden.png',
-    showImg: '../../asstes/images/show.png',
+    hiddenImg: '../../assets/images/hidden.png',
+    showImg: '../../assets/images/show.png',
     loginUrl: 'https://jxfw.gdut.edu.cn/new/login',
-    codeUrl: 'https://jxfw.gdut.edu.cn/yzm?d=', // 验证码接口
-    codeImg: ''
+    codeUrl: 'https://jxfw.gdut.edu.cn/yzm?d=1603814815275', // 验证码接口
+    setCookies: '', // 验证码接口返回的 set-cookies
+    codeImg: '' // 验证码 base64
   },
   onLoad: function () {
-    this.setData({
-      codeImg: this.data.codeUrl + Math.random()
-    })
+    this.getCode()
   },
   snoFoucs: function() {
     this.setData({
@@ -84,21 +83,36 @@ Page({
     })
   },
   updateCode: function() {
-    this.setData({
-      codeImg: this.data.codeUrl + Math.random()
+    this.getCode()
+  },
+  getCode: function() {
+    getAction(this.data.codeUrl, {}, {}, 'arraybuffer')
+    .then(res => {
+      console.log('获取验证码成功 :>>', res)
+      let base64 = wx.arrayBufferToBase64(res.data)
+      this.setData({
+        codeImg: " data:image/jpeg;base64," + base64,
+        setCookies: res.cookies[0]
+      })
     })
-    console.log('刷新验证码')
+    .catch(err => {
+      console.log('获取验证码失败 :>>', err)
+    })
   },
   login: function() {
     let header = {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Cookie': this.data.setCookies
     }
     postAction(this.data.loginUrl, this.data.user, header)
     .then(res => {
-      console.log(res)
+      console.log('登录成功 :>>', res)
+      wx.redirectTo({
+        url: '../index/index',
+      })
     })
     .catch(err => {
-      console.log(err)
+      console.log('登录失败 :>>', err)
     })
   }
 })

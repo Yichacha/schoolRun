@@ -18,7 +18,6 @@ const request = (url, options) => {
   }
 
   return new Promise((resolve, reject) => {
-    console.log(options.responseType)
     wx.request({
       url: baseUrl + url,
       data: options.data,
