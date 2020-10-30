@@ -1,16 +1,16 @@
 <view class="home">
   <view class="home-head">
     <van-row>
-    <van-col span="4">
-      <van-icon name="bars" size="60rpx" />
-    </van-col>
-    <van-col span="16">
-      <van-search v-model="value" placeholder="搜索地点" shape="round" class="home-serach" />
-    </van-col>
-    <van-col span="4">
-      <van-icon name="chat-o" dot size="60rpx" />
-    </van-col>
-  </van-row>
+      <van-col span="4">
+        <van-icon name="bars" size="40rpx" color="#AFAFAF" />
+      </van-col>
+      <van-col span="16">
+        <van-search v-model="value" placeholder="搜索地点" shape="round" class="home-serach" />
+      </van-col>
+      <van-col span="4">
+        <van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" />
+      </van-col>
+    </van-row>
   </view>
 
   <view class="home-orderList">
@@ -24,17 +24,20 @@
       </view>
       <view class="order-info">
         <view class="content-content">求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案</view>
-        <view class="order-price"><van-icon name="gold-coin-o" size="large" color="#FCA44B"/>2</view>
+        <view class="order-price">
+          <image src="../../assets/tabarImages/renminbi.png"></image><text>2</text>
+        </view>
       </view>
       <view class="order-request">
         <view class="order-route">五饭------->东十三</view>
         <view class="order-requestTime">23:20--23:40</view>
         <view class="order-toChat">
-          <van-icon name="chat" size="large"/>
+          <image src="../../assets/tabarImages/liaotian.png"></image>
         </view>
       </view>
     </view>
   </view>
-<!-- tabar组件 -->
-<my-tabar></my-tabar>
 </view>
+<!-- tabar -->
+<import src="../../templates/tabar/tabar.wxml"/>
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>

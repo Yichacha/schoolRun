@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/issue/issue",
     "pages/index/index",
+    "pages/issue/issue",
     "pages/login/login",
     "pages/mine/mine"
   ],
@@ -11,8 +11,5 @@
     "navigationBarTitleText": "校园跑跑",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json",
-  "usingComponents": {
-    "my-tabar": "./components/tabar/tabar"
-  }
+  "sitemapLocation": "sitemap.json"
 }

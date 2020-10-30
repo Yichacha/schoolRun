@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import "/templates/tabar/tabar.wxss";
+
 .container {
   height: 100%;
   display: flex;

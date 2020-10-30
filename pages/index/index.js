@@ -1,12 +1,13 @@
 //获取应用实例
 const app = getApp()
 import { getToken } from '../../utils/cookies.js'
-
+var tabar = require('../../templates/tabar/tabar.js');
 Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // active: 0,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -15,6 +16,8 @@ Page({
     })
   },
   onLoad: function () {
+    tabar.tabbar("tabBar", 0, this)//0表示第一个tabbar
+
     const token = getToken();
     if(token) {
       // 获取用户信息
@@ -63,5 +66,4 @@ Page({
       hasUserInfo: true
     })
   },
-
 })

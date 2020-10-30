@@ -14,6 +14,9 @@
   justify-content: center;
   align-items: center;
 }
+.home .home-head .van-col .van-search {
+  width: 550rpx;
+}
 .home .home-orderList .order-item {
   color: #707070;
   padding: 20rpx 35rpx;
@@ -60,8 +63,11 @@
   text-align: right;
   flex: 1;
 }
-.home .home-orderList .order-item .order-info .order-price .van-icon {
-  top: 5rpx;
+.home .home-orderList .order-item .order-info .order-price image {
+  position: relative;
+  width: 40rpx;
+  height: 40rpx;
+  top: 8rpx;
 }
 .home .home-orderList .order-item .order-request {
   display: flex;
@@ -80,4 +86,8 @@
   flex: 1;
   text-align: right;
   top: 6rpx;
+}
+.home .home-orderList .order-item .order-request .order-toChat image {
+  width: 40rpx;
+  height: 40rpx;
 }

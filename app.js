@@ -4,6 +4,5 @@ App({
     userInfo: null,
     baseUrl: '',
     token: 'ACCESS_TOKEN',
-    tabatActive: ''
   }
 })
