@@ -7,7 +7,16 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    // active: 0,
+    show: false, // 控制遮罩层的显示与隐藏
+    sortRules: [
+      { text: '最新发布', value: '0' },
+      { text: '发布最久', value: '1' },
+      { text: '价格升序', value: '2' },
+      { text: '价格降序', value: '3' },
+      { text: '距离最近', value: '4' },
+      { text: '距离最远', value: '5' },
+    ],
+    serachValue: '', // 搜索关键字
   },
   //事件处理函数
   bindViewTap: function() {
@@ -66,4 +75,26 @@ Page({
       hasUserInfo: true
     })
   },
+  onClickShow() {
+    this.setData({ show: true });
+    console.log('遮罩层出现')
+  },
+
+  onClickHide() {
+    this.setData({ show: false });
+    console.log('遮罩层隐藏')
+
+  },
+  noop() {},
+  // 改变排序方式的方法
+  changeSortRule(e) {
+    // 点击的排序方式索引
+    console.log(e.target.dataset.value)
+  },
+  // 点击搜索框导航至搜索页面
+  toSearch(){
+    wx.navigateTo({
+      url: '/pages/serach/serach',
+    })
+  }
 })

@@ -14,6 +14,49 @@
   justify-content: center;
   align-items: center;
 }
+.home .home-head .van-col van-overlay van-transition view {
+  top: 120rpx;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.home .home-head .van-col .wrapper .sort-menu {
+  position: fixed;
+  top: 100rpx;
+  left: 24rpx;
+  width: 218rpx;
+  background-color: #ffffff;
+  padding: 30rpx 28rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  box-shadow: #ccc 0px 0px 1px;
+}
+.home .home-head .van-col .wrapper .sort-menu ::before,
+.home .home-head .van-col .wrapper .sort-menu ::after {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  top: -48rpx;
+  position: absolute;
+  width: 0;
+  left: 10px;
+}
+.home .home-head .van-col .wrapper .sort-menu ::before {
+  border-width: 10px;
+  border-bottom-color: #fcfcfc;
+  top: -42rpx;
+}
+.home .home-head .van-col .wrapper .sort-menu ::after {
+  border-width: 10px;
+  border-bottom-color: #fff;
+  top: -41rpx;
+}
+.home .home-head .van-col .wrapper .sort-menu .sort-item {
+  background-color: #ffffff;
+  color: #666666;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  height: 70rpx;
+  letter-spacing: 5rpx;
+}
 .home .home-head .van-col .van-search {
   width: 550rpx;
 }

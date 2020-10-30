@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/serach/serach",
     "pages/index/index",
     "pages/issue/issue",
     "pages/login/login",
