@@ -1,0 +1,42 @@
+<view class="issue">
+  <view class="textarea_container">
+    <textarea maxlength="100" placeholder="需要送什么东西嘞……" bindinput="inputText"></textarea>
+    <text class="input_total">{{ total }}/100</text>
+  </view>
+  <view class="info_container">
+    <view class="fee_input">
+      <text>逾期费用</text>
+      <view class="fee">
+        <image src="../../assets/images/money.png"></image>
+        <input class="fee_time" maxlength="2"></input>
+      </view>
+    </view>
+    <view class="time_input">
+      <text>期待时间</text>
+      <view class="time">
+        <input class="fee_time" placeholder="00 : 00" disabled bindtap="showPicker"></input>
+        <text>  -   </text>
+        <input class="fee_time" placeholder="00 : 00" disabled bindtap="showPicker"></input>
+      </view>
+    </view>
+    <view class="origin_input">
+      <text>起点</text>
+      <input></input>
+    </view>
+    <view class="detination_input">
+      <text>终点</text>
+      <input></input>
+    </view>
+    <button>发送</button>
+  </view>
+  <view class="datetime_picker" wx:if="{{ chooesTime }}">
+    <van-datetime-picker
+      class="datetime_picker"
+      type="time"
+      value="{{ currentDate }}"
+      bind:input="onInput"
+      bind:confirm="handleConfirm"
+      bind:cancel="handleCancel"
+    />
+  </view>
+</view>

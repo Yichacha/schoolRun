@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+  },
+  "navigationBarBackgroundColor": "#F5F5F5",
+  "navigationBarTitleText": "跑腿"
+}

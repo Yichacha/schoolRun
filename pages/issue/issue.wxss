@@ -1,0 +1,120 @@
+.issue {
+  height: 100vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  color: #686868;
+  background-color: #F5F5F5;
+}
+
+.issue .textarea_container {
+  padding: 30rpx;
+  height: 266rpx;
+  margin-bottom: 10rpx;
+  position: relative;
+  background-color: #FFFFFF;
+}
+.issue .info_container {
+  flex: 1;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+.issue .textarea_container textarea {
+  width: 100%;
+  height: 230rpx;
+  overflow: auto;
+  line-height: 56rpx;
+  font: 32rpx PingFangSC-Regular;
+}
+.issue .info_container button {
+  width: 422rpx;
+  height: 86rpx;
+  background-color: #FCA44B;
+  color: #FFFFFF;
+  font: 36rpx PingFangSC-Regular;
+  line-height: 86rpx;
+  margin: auto;
+  margin-top: 72rpx;
+  border-radius: 46rpx;
+  text-align: center;
+}
+
+.issue .textarea_container .input_total {
+  position: absolute;
+  z-index: 10;
+  bottom: 20rpx;
+  right: 30rpx;
+}
+
+.issue .info_container view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+  height: 102rpx;
+  font: 30rpx PingFangSC-Regular;
+  border-bottom: 2rpx solid #EEEEEE;
+}
+
+.issue .info_container view text {
+  line-height: 102rpx;
+}
+
+
+.issue .info_container view input {
+  display: inline-block;
+}
+.issue .info_container view .fee_time {
+  width: 140rpx;
+  height: 60rpx;
+  background-color: #F5F5F5;
+  border-radius: 10rpx;
+}
+
+
+/* 逾期费用 */
+.issue .info_container .fee_input .fee {
+  position: relative;
+  display: flex;
+  padding: 0;
+}
+.issue .info_container .fee_input .fee input {
+  width: 90rpx;
+  padding-left: 50rpx;
+}
+.issue .info_container .fee_input .fee image {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 36rpx;
+  left: 16rpx;
+  z-index: 10;
+}
+
+/* 期待时间 */
+.issue .info_container .time_input .time {
+  border: none;
+  text-align: center;
+  height: auto;
+  display: flex;
+  padding: 0;
+}
+.issue .info_container .time_input .time text {
+  padding: 0;
+}
+
+/* 时间选择器 */
+.issue .datetime_picker {
+  position: absolute;
+  z-index: 11;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(000, 000, 000, 0.5);
+}
+.issue .datetime_picker van-datetime-picker {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  bottom: 0;
+  z-index: 100;
+}
