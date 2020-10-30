@@ -1,0 +1,11 @@
+.tabar .home-publish {
+  text-align: center;
+}
+.tabar .home-publish image {
+  z-index: 999;
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  bottom: 40rpx;
+  transform: translate(-50%, 0);
+}
