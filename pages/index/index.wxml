@@ -3,7 +3,8 @@
   <view class="home-head">
     <van-row>
       <van-col span="4">
-        <van-icon name="bars" size="40rpx" color="#AFAFAF"  bind:click="onClickShow"/>
+        <van-icon wx:if="{{initIcon}}" name="bars" size="40rpx" color="#AFAFAF" bind:click="onClickShow"/>
+        <van-icon wx:else name="bars" size="40rpx" color="#FCA44B" />
         <!-- 排序下拉菜单 -->
         <van-overlay show="{{ show }}" bind:click="onClickHide" >
           <view class="wrapper">
@@ -22,9 +23,10 @@
     </van-row>
   </view>
   <!-- 订单list -->
-  <view class="home-orderList">
+  <view class="home-orderList" wx:if="{{orderList.length!=0}}">
    <order-item></order-item>
   </view>
+  <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>
 </view>
 <!-- tabar -->
 <import src="../../templates/tabar/tabar.wxml" />

@@ -1,6 +1,10 @@
+page {
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
 .home {
   width: 100%;
-  background-color: #f5f5f5;
 }
 .home .home-head {
   width: 100%;

@@ -6,7 +6,7 @@
   width:100%;
   position: fixed;
   bottom:0;
-  padding:10rpx;
+  padding:20rpx;
   margin-left:-4rpx;
   background:#fff;
   font-size:20rpx;
@@ -26,9 +26,9 @@
 }
 .home-publish image{
   z-index: 999;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   position:fixed;
-  bottom:40rpx;
+  bottom:60rpx;
   transform: translate(-50%, 0);
 }

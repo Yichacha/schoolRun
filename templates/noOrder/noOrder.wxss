@@ -1,0 +1,14 @@
+.no-order{
+  width: 100%;
+  text-align: center;
+}
+.no-order image{
+  width: 360rpx;
+  height: 280rpx;
+  margin-top: 30rpx;
+}
+.no-order view{
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 40rpx;
+}
