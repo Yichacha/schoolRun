@@ -8,32 +8,34 @@
       <text>逾期费用</text>
       <view class="fee">
         <image src="../../assets/images/money.png"></image>
-        <input class="fee_time" maxlength="2"></input>
+        <input class="fee_time" maxlength="2" bindblur="feeBlur"></input>
       </view>
     </view>
     <view class="time_input">
       <text>期待时间</text>
       <view class="time">
-        <input class="fee_time" placeholder="00 : 00" disabled bindtap="showPicker"></input>
-        <text>  -   </text>
-        <input class="fee_time" placeholder="00 : 00" disabled bindtap="showPicker"></input>
+        <text class="fee_time" bindtap="showPicker" data-value="{{ 0 }}">{{ startDate }}</text>
+        <text>-</text>
+        <text class="fee_time" bindtap="showPicker" data-value="{{ 1 }}">{{ endDate }}</text>
       </view>
     </view>
     <view class="origin_input">
       <text>起点</text>
-      <input></input>
+      <input bindblur="originBlur"></input>
     </view>
     <view class="detination_input">
       <text>终点</text>
-      <input></input>
+      <input bindblur="detinationBlur"></input>
     </view>
-    <button>发送</button>
+    <button bindtap="send">发送</button>
   </view>
-  <view class="datetime_picker" wx:if="{{ chooesTime }}">
+  <view class="datetime_picker" wx:if="{{ choosePicker }}">
     <van-datetime-picker
       class="datetime_picker"
-      type="time"
+      type="datetime"
       value="{{ currentDate }}"
+      min-date="{{ minDate }}"
+      max-date="{{ maxDate }}"
       bind:input="onInput"
       bind:confirm="handleConfirm"
       bind:cancel="handleCancel"

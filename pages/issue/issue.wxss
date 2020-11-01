@@ -56,16 +56,8 @@
   border-bottom: 2rpx solid #EEEEEE;
 }
 
-.issue .info_container view text {
-  line-height: 102rpx;
-}
 
-
-.issue .info_container view input {
-  display: inline-block;
-}
 .issue .info_container view .fee_time {
-  width: 140rpx;
   height: 60rpx;
   background-color: #F5F5F5;
   border-radius: 10rpx;
@@ -76,6 +68,7 @@
 .issue .info_container .fee_input .fee {
   position: relative;
   display: flex;
+  align-items: center;
   padding: 0;
 }
 .issue .info_container .fee_input .fee input {
@@ -86,7 +79,6 @@
   width: 30rpx;
   height: 30rpx;
   position: absolute;
-  top: 36rpx;
   left: 16rpx;
   z-index: 10;
 }
@@ -100,7 +92,8 @@
   padding: 0;
 }
 .issue .info_container .time_input .time text {
-  padding: 0;
+  padding: 0 22rpx;
+  line-height: 60rpx;
 }
 
 /* 时间选择器 */
