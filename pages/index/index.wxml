@@ -14,7 +14,7 @@
         </van-overlay>
       </van-col>
       <van-col span="16">
-        <van-search v-model="serachValue" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch"/>
+        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch"/>
       </van-col>
       <van-col span="4">
         <van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" />
@@ -23,28 +23,7 @@
   </view>
   <!-- 订单list -->
   <view class="home-orderList">
-    <view class="order-item" wx:for="{{6}}" wx:key="index">
-      <view class="user-info">
-        <view class="user-avator">
-          <image src="../../assets/tabarImages/niumang.png"></image>
-        </view>
-        <text class="user-name">我是ID我是ID我是ID</text>
-        <text class="user-createTime">5分钟前</text>
-      </view>
-      <view class="order-info">
-        <view class="content-content">求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案</view>
-        <view class="order-price">
-          <image src="../../assets/tabarImages/renminbi.png"></image><text>2</text>
-        </view>
-      </view>
-      <view class="order-request">
-        <view class="order-route">五饭------->东十三</view>
-        <view class="order-requestTime">23:20--23:40</view>
-        <view class="order-toChat">
-          <image src="../../assets/tabarImages/liaotian.png"></image>
-        </view>
-      </view>
-    </view>
+   <order-item></order-item>
   </view>
 </view>
 <!-- tabar -->

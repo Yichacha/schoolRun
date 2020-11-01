@@ -17,6 +17,7 @@ Page({
       { text: '距离最远', value: '5' },
     ],
     serachValue: '', // 搜索关键字
+    orderList: [], // 订单列表
   },
   //事件处理函数
   bindViewTap: function() {
@@ -26,7 +27,10 @@ Page({
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 0, this)//0表示第一个tabbar
-
+    this.setData({ // 将暂存在全局的搜索关键字保存在searchValue中
+      serachValue: app.globalData.serachKey,
+    })
+    console.log('我是首页的搜索关键字：' + this.data.serachValue)
     const token = getToken();
     if(token) {
       // 获取用户信息
@@ -96,5 +100,13 @@ Page({
     wx.navigateTo({
       url: '/pages/serach/serach',
     })
+  },
+  // 从搜索页面回来的真正搜索
+  toGetSearchList(){
+    if(this.data.serachValue){
+      // 如果搜索关键字不为空，发起获取订单列表的请求
+    }else{
+      // 如果关键字为空，获取全部订单
+    }
   }
 })

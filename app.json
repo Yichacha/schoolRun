@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/serach/serach",
     "pages/index/index",
+    "pages/serach/serach",
     "pages/issue/issue",
     "pages/login/login",
     "pages/mine/mine"
@@ -12,5 +12,8 @@
     "navigationBarTitleText": "校园跑跑",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "order-item": "/components/order-item/order-item"
+  }
 }

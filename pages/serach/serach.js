@@ -1,66 +1,26 @@
-// pages/serach/serach.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    searchValue: ''
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  // 搜索框双向数据绑定
+  getSerachKey(e){
+    this.setData({
+      searchValue: e.detail
+    })
+    app.globalData.serachKey = this.data.searchValue // 将搜索关键字保存到全局变量中，以传给首页
+    console.log('我是全局的搜索关键字：' + app.globalData.serachKey)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 点击搜索
+  toSearchOrder(e) {
+    console.log(e)
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
   }
 })
