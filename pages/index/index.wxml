@@ -1,40 +1,33 @@
 <view class="home">
+  <!-- 头部、搜索框 -->
   <view class="home-head">
     <van-row>
-    <van-col span="4">
-      <van-icon name="bars" size="60rpx" />
-    </van-col>
-    <van-col span="16">
-      <van-search v-model="value" placeholder="搜索地点" shape="round" class="home-serach" />
-    </van-col>
-    <van-col span="4">
-      <van-icon name="chat-o" dot size="60rpx" />
-    </van-col>
-  </van-row>
+      <van-col span="4">
+        <van-icon wx:if="{{initIcon}}" name="bars" size="40rpx" color="#AFAFAF" bind:click="onClickShow"/>
+        <van-icon wx:else name="bars" size="40rpx" color="#FCA44B" />
+        <!-- 排序下拉菜单 -->
+        <van-overlay show="{{ show }}" bind:click="onClickHide" >
+          <view class="wrapper">
+            <view class="sort-menu" catch:tap="noop">
+              <view class="sort-item" wx:for="{{sortRules}}" wx:for-item="item" wx:key="index" data-value="{{item.value}}" bind:tap="changeSortRule">{{item.text}}</view>
+            </view>
+          </view>
+        </van-overlay>
+      </van-col>
+      <van-col span="16">
+        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch"/>
+      </van-col>
+      <van-col span="4">
+        <van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" />
+      </van-col>
+    </van-row>
   </view>
-
-  <view class="home-orderList">
-    <view class="order-item" wx:for="{{6}}" wx:key="index">
-      <view class="user-info">
-        <view class="user-avator">
-          <image src="../../assets/tabarImages/niumang.png"></image>
-        </view>
-        <text class="user-name">我是ID我是ID我是ID</text>
-        <text class="user-createTime">5分钟前</text>
-      </view>
-      <view class="order-info">
-        <view class="content-content">求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案求带一份鸡肉卷我是文案我是文案我是文案我是文案我是文案</view>
-        <view class="order-price"><van-icon name="gold-coin-o" size="large" color="#FCA44B"/>2</view>
-      </view>
-      <view class="order-request">
-        <view class="order-route">五饭------->东十三</view>
-        <view class="order-requestTime">23:20--23:40</view>
-        <view class="order-toChat">
-          <van-icon name="chat" size="large"/>
-        </view>
-      </view>
-    </view>
+  <!-- 订单list -->
+  <view class="home-orderList" wx:if="{{orderList.length!=0}}">
+   <order-item></order-item>
   </view>
-<!-- tabar组件 -->
-<my-tabar></my-tabar>
+  <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>
 </view>
+<!-- tabar -->
+<import src="../../templates/tabar/tabar.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

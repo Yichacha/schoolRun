@@ -3,6 +3,7 @@
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-icon": "@vant/weapp/icon/index",
-    "van-search": "@vant/weapp/search/index"
+    "van-search": "@vant/weapp/search/index",
+    "van-overlay": "@vant/weapp/overlay/index"
   }
 }

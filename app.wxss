@@ -1,4 +1,7 @@
 /**app.wxss**/
+@import "/templates/tabar/tabar.wxss";
+@import "/templates/noOrder/noOrder.wxss"
+
 .container {
   height: 100%;
   display: flex;

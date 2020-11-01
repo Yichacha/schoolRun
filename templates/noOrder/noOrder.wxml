@@ -1,0 +1,4 @@
+<view class="no-order">
+<image src="/assets/tabarImages/noOrder.png"></image>
+<view>找不到对应的订单o(╥﹏╥)o</view>
+</view>

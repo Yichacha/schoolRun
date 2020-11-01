@@ -1,5 +1,5 @@
 <view class="mine">
   我的
-  <!-- tabar组件 -->
-  <my-tabar></my-tabar>
 </view>
+<import src="../../templates/tabar/tabar.wxml"/>
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>

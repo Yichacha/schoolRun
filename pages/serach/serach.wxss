@@ -1,0 +1,22 @@
+.serach {
+  width: 100%;
+  padding: 24rpx 26rpx;
+  box-sizing: border-box;
+}
+.serach .serach-history {
+  margin: 0 26rpx;
+  color: #666666;
+  font-size: 28rpx;
+}
+.serach .serach-history text {
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.serach .serach-history .history-title {
+  color: #999999;
+  font-size: 24rpx;
+}
+.serach .serach-history .history-content {
+  margin: 0 10rpx;
+  letter-spacing: 2rpx;
+}

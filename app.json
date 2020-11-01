@@ -1,18 +1,19 @@
 {
   "pages": [
-    "pages/issue/issue",
     "pages/index/index",
     "pages/login/login",
+    "pages/serach/serach",
+    "pages/issue/issue",
     "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFE7CF",
+    "navigationBarBackgroundColor": "#F5F5F5",
     "navigationBarTitleText": "校园跑跑",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "my-tabar": "./components/tabar/tabar"
+    "order-item": "/components/order-item/order-item"
   }
 }

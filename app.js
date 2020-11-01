@@ -4,6 +4,6 @@ App({
     userInfo: null,
     baseUrl: '',
     token: 'ACCESS_TOKEN',
-    tabatActive: ''
+    serachKey: '' // 搜索的关键字
   }
 })
