@@ -45,12 +45,14 @@ Page({
       url: '../index/index'
     })
   },
-  onLoad: function () {
-    tabar.tabbar("tabBar", 0, this) //0表示第一个tabbar
+  onShow(){
     this.setData({ // 将暂存在全局的搜索关键字保存在searchValue中
-      serachValue: app.globalData.serachKey,
+      serachValue: app.globalData.serachKey
     })
     console.log('我是首页的搜索关键字：' + this.data.serachValue)
+  },
+  onLoad: function () {
+    tabar.tabbar("tabBar", 0, this) //0表示第一个tabbar
     const token = getToken();
     if (token) {
       // 获取用户信息

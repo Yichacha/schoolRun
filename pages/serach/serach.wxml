@@ -1,7 +1,8 @@
 <view class="serach">
-  <van-search value="{{ searchValue }}" placeholder="搜索地点" shape="round" focus clearable maxlength="20" bindchange="getSerachKey" bindsearch="toSearchOrder"/>
+  <van-search value="{{ searchValue }}" placeholder="搜索地点" shape="round" focus clearable maxlength="20" bindclear="clearSearchValue" bindchange="changeSerachKey" 
+  bindsearch="toSearchOrder"/>
   <view wx:if="{{ !searchValue}}" class="serach-history">
-    <text class="history-title">历史搜索：</text>
-    <text class="history-content" wx:for="{{15}}" wx:key="index">南亭</text>
+    <view class="history-title">历史搜索：</view>
+    <view class="history-content" wx:for="{{searchHistory}}" wx:key="index">{{item}}</view>
   </view>
 </view>
