@@ -33,8 +33,9 @@
     .order-info {
         color: #707070;
         display: flex;
-        align-items: center;
-        margin: 20rpx 0;
+        margin: 20rpx 0 0;
+        height: 90rpx;
+        line-height: 90rpx;
 
         .content-content {
             text-overflow: -o-ellipsis-lastline;
@@ -53,12 +54,15 @@
             color: #FCA44B;
             text-align: right;
             flex: 1;
-
             image {
-                position: relative;
                 width: 40rpx;
                 height: 40rpx;
-                top: 8rpx;
+                position: relative;
+                top: -12rpx;
+            }
+            text{
+                position: relative;
+                top: -20rpx;
             }
         }
     }
@@ -69,23 +73,47 @@
         font-size: 28rpx;
 
         .order-route {
-            color: #666666;
-            flex: 6;
+            flex: 8;
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .jiantou{
+                width: 70rpx;
+                height: 10rpx;
+                margin: 0 10rpx;
+            }
+            .normal {
+                color: #666666;
+                display: inline-block;
+            }
+
+            .highlight {
+                color: #FCA44B;
+                display: inline-block;
+
+            }
         }
 
         .order-requestTime {
+            display: flex;
             color: #5A8857;
-            flex: 3;
+            flex: 4;
+            align-items: flex-end;
+
+
         }
 
         .order-toChat {
+            display: flex;
             flex: 1;
             text-align: right;
             top: 6rpx;
+            align-items: flex-end;
 
             image {
                 width: 40rpx;
                 height: 40rpx;
+                margin-left: 6rpx;
             }
         }
     }

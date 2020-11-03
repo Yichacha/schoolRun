@@ -18,7 +18,6 @@ Page({
   },
   // 搜索框双向数据绑定
   changeSerachKey(e){
-    console.log('okaaaa')
     this.setData({
       searchValue: e.detail
     })
@@ -37,5 +36,15 @@ Page({
     wx.reLaunch({
       url: '/pages/index/index',
     })
+  },
+  // 点击搜索历史触发搜索
+  searchByHistory(e){
+    console.log(e.currentTarget.dataset.key)
+    this.setData({
+      searchValue: e.currentTarget.dataset.key
+    })
+    app.globalData.serachKey = e.currentTarget.dataset.key
+    console.log('我是'+this.data.searchValue)
+    this.toSearchOrder()
   }
 })

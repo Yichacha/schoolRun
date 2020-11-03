@@ -1,8 +1,11 @@
 //获取应用实例
 const app = getApp()
+// import {
+//   getToken
+// } from '../../utils/cookies.js'
 import {
-  getToken
-} from '../../utils/cookies.js'
+  formatTimeTwo
+} from '../../utils/util.js'
 var tabar = require('../../templates/tabar/tabar.js');
 Page({
   data: {
@@ -37,7 +40,19 @@ Page({
       },
     ],
     serachValue: '', // 搜索关键字
-    orderList: [{value:1}], // 订单列表
+    orderList: [{
+      value: 1
+    }], // 订单列表
+    order: {
+      userName: '花花',
+      createTime: '3分钟前',
+      orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
+      address1: '六饭',
+      address2: '东十三',
+      time1: '23:20',
+      time2: '23:40',
+      money: '5'
+    }
   },
   //事件处理函数
   bindViewTap: function () {
@@ -45,70 +60,23 @@ Page({
       url: '../index/index'
     })
   },
-  onShow(){
+  onShow() {
     this.setData({ // 将暂存在全局的搜索关键字保存在searchValue中
       serachValue: app.globalData.serachKey
     })
-    console.log('我是首页的搜索关键字：' + this.data.serachValue)
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 0, this) //0表示第一个tabbar
-    const token = getToken();
-    if (token) {
-      // 获取用户信息
-
-      if (app.globalData.userInfo) {
-        this.setData({
-          userInfo: app.globalData.userInfo,
-          hasUserInfo: true
-        })
-      } else if (this.data.canIUse) {
-        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-        // 所以此处加入 callback 以防止这种情况
-        app.userInfoReadyCallback = res => {
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      } else {
-        // 在没有 open-type=getUserInfo 版本的兼容处理
-        wx.getUserInfo({
-          success: res => {
-            app.globalData.userInfo = res.userInfo
-            this.setData({
-              userInfo: res.userInfo,
-              hasUserInfo: true
-            })
-          }
-        })
-      }
-
-    }
-    //  else {
-    //   // 跳转到登录页面
-    //   wx.redirectTo({
-    //     url: '../login/login'
-    //   })
-    // }
+    this.getOrderList()
   },
-  // 获取用户信息
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+  // 显示遮罩层
   onClickShow() {
     this.setData({
       show: true,
       initIcon: false
     });
-    console.log('遮罩层出现,图标变色')
   },
-
+  // 隐藏遮罩层
   onClickHide() {
     this.setData({
       show: false,
@@ -118,6 +86,14 @@ Page({
 
   },
   noop() {},
+  // 获取首页订单数据
+  getOrderList() {
+    let time1 = formatTimeTwo(1488481383, 'M-D h:m')
+    let time2 = formatTimeTwo(1604387662, 'h:m')
+    console.log('转换后的时间：' + ' ' + time1 + ' ' + time2)
+  },
+
+
   // 改变排序方式的方法
   changeSortRule(e) {
     this.setData({
@@ -140,5 +116,5 @@ Page({
     } else {
       // 如果关键字为空，获取全部订单
     }
-  }
+  },
 })
