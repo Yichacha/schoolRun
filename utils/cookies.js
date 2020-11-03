@@ -1,24 +1,26 @@
 const setToken = (key, data) => {
-  wx.setStorage({
-    key: key,
-    data: data
-  })
+  try {
+    wx.setStorageSync(key, data)
+  } catch (e) {
+    console.log(e)
+  }
 }
 const getToken = (key) => {
-  wx.getStorage({
-    key: key,
-    success (res) {
-      console.log(res.data)
+  try {
+    var value = wx.getStorageSync(key)
+    if (value) {
+      return value
     }
-  })
+  } catch (e) {
+    console.log(e)
+  }
 }
 const removeToken = (key) => {
-  wx.removeStorage({
-    key: key,
-    success (res) {
-      console.log(res)
-    }
-  })
+  try {
+    wx.removeStorageSync(key)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 module.exports = {
