@@ -69,3 +69,10 @@ page {
 .home .home-head .van-col .van-search {
   width: 550rpx;
 }
+.home .home-head .van-col .to-chat {
+  width: 70%;
+  height: 70%;
+  text-align: center;
+  padding: 12rpx;
+  box-sizing: border-box;
+}

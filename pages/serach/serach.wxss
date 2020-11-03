@@ -5,7 +5,7 @@
 }
 .serach .serach-history {
   margin: 0 26rpx;
-  color: #666666;
+  color: #999999;
   font-size: 28rpx;
 }
 .serach .serach-history view {
@@ -14,10 +14,15 @@
   display: inline-block;
 }
 .serach .serach-history .history-title {
-  color: #999999;
   font-size: 24rpx;
 }
 .serach .serach-history .history-content {
+  color: #666666;
   margin: 0 10rpx;
   letter-spacing: 2rpx;
+}
+.serach .serach-history .clear-history {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 26rpx;
 }

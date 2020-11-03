@@ -10,6 +10,10 @@ Page({
   },
   // 页面从后台切换到前台时执行
   onShow(){
+   this.initSearchHistory()
+  },
+  // 初始化
+  initSearchHistory(){
     var searchHistory = wx.getStorageSync('searchHistory')
     this.setData({
       searchValue: app.globalData.serachKey,
@@ -22,7 +26,6 @@ Page({
       searchValue: e.detail
     })
     app.globalData.serachKey = e.detail   // 将搜索关键字保存到全局变量中，以传给首页
-    console.log('我是全局的搜索关键字：' + app.globalData.serachKey)
   },
   // 点击搜索
   toSearchOrder() {
@@ -39,12 +42,17 @@ Page({
   },
   // 点击搜索历史触发搜索
   searchByHistory(e){
-    console.log(e.currentTarget.dataset.key)
     this.setData({
       searchValue: e.currentTarget.dataset.key
     })
     app.globalData.serachKey = e.currentTarget.dataset.key
-    console.log('我是'+this.data.searchValue)
     this.toSearchOrder()
+  },
+  // 清空搜索历史
+  clearSearchHistory(){
+    wx.setStorageSync('searchHistory', [])
+    this.setData({
+      searchHistory: []
+    })
   }
 })

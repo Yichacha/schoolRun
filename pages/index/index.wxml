@@ -3,28 +3,32 @@
   <view class="home-head">
     <van-row>
       <van-col span="4">
-        <van-icon wx:if="{{initIcon}}" name="bars" size="40rpx" color="#AFAFAF" bind:click="onClickShow"/>
+        <van-icon wx:if="{{initIcon}}" name="bars" size="40rpx" color="#AFAFAF" bind:click="onClickShow" />
         <van-icon wx:else name="bars" size="40rpx" color="#FCA44B" />
         <!-- 排序下拉菜单 -->
-        <van-overlay show="{{ show }}" bind:click="onClickHide" >
+        <van-overlay show="{{ show }}" bind:click="onClickHide">
           <view class="wrapper">
             <view class="sort-menu" catch:tap="noop">
-              <view class="sort-item" wx:for="{{sortRules}}" wx:for-item="item" wx:key="index" data-value="{{item.value}}" bind:tap="changeSortRule">{{item.text}}</view>
+              <view class="sort-item" wx:for="{{sortRules}}" wx:for-item="item" wx:key="index" data-value="{{item.value}}" bind:tap="changeSortRule">
+                {{item.text}}
+              </view>
             </view>
           </view>
         </van-overlay>
       </van-col>
       <van-col span="16">
-        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch"/>
+        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch" />
       </van-col>
       <van-col span="4">
-      <navigator url="/pages/message/message"><van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" /></navigator>
+        <navigator class="to-chat" url="/pages/message/message">
+          <van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" />
+        </navigator>
       </van-col>
     </van-row>
   </view>
   <!-- 订单list -->
   <view class="home-orderList" wx:if="{{orderList.length!=0}}">
-   <order-item searchKey='{{serachValue}}' order='{{order}}'></order-item>
+    <order-item searchKey='{{serachValue}}' order='{{order}}'></order-item>
   </view>
   <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>
 </view>
