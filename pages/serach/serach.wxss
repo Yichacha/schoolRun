@@ -8,9 +8,10 @@
   color: #666666;
   font-size: 28rpx;
 }
-.serach .serach-history text {
-  height: 40rpx;
-  line-height: 40rpx;
+.serach .serach-history view {
+  height: 50rpx;
+  line-height: 50rpx;
+  display: inline-block;
 }
 .serach .serach-history .history-title {
   color: #999999;

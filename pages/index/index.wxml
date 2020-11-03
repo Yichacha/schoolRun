@@ -18,7 +18,7 @@
         <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch"/>
       </van-col>
       <van-col span="4">
-        <van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" />
+      <navigator url="/pages/message/message"><van-icon name="chat-o" dot size="40rpx" color="#AFAFAF" /></navigator>
       </van-col>
     </van-row>
   </view>
