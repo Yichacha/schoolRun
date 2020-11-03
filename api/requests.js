@@ -1,11 +1,11 @@
 const app = getApp()
 import { getToken, setToken, removeToken } from '../utils/cookies.js'
 
-const baseUrl = '';
+const baseUrl = 'http://www.vtmer2018.top:8099';
 
 const request = (url, options) => {
-  var token = getToken(app.globalData.token);
-  var header = {};
+  const token = getToken(app.globalData.token);
+  let header = {};
   if(!token){
     header = {
       'Content-Type': 'application/json; charset=UTF-8'
@@ -19,7 +19,7 @@ const request = (url, options) => {
 
   return new Promise((resolve, reject) => {
     wx.request({
-      url: baseUrl + url,
+      url: url[0] == "/" ? baseUrl + url : url,
       data: options.data,
       method: options.method,
       header: Object.assign(header, options.header),

@@ -71,7 +71,7 @@
 }
 .login .input_container .code_container .code {
   margin-bottom: 0;
-  width: 300rpx;
+  /* width: 300rpx; */
   margin-right: 20rpx;
 }
 .login .input_container .code_container .code_img {

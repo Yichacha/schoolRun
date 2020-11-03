@@ -21,6 +21,7 @@ Page({
     showImg: '../../assets/images/show.png',
     loginUrl: 'https://jxfw.gdut.edu.cn/new/login',
     codeUrl: 'https://jxfw.gdut.edu.cn/yzm?d=1603814815275', // 验证码接口
+    tokenUrl: '/login/wxMiniProGramLogin',
     setCookies: '', // 验证码接口返回的 set-cookies
     codeImg: '' // 验证码 base64
   },
@@ -99,17 +100,77 @@ Page({
       console.log('获取验证码失败 :>>', err)
     })
   },
-  login: function() {
-    let header = {
+  updateToken: function() {
+    wx.login({
+      success: res => {
+        app.globalData.code = res.code
+        if (app.globalData.code) {
+          console.log('获取用户登录态成功！' + res.errMsg)
+          postAction(
+            this.data.tokenUrl,
+            {
+              code: app.globalData.code,
+              username: app.globalData.userInfo.nickName
+            }
+          )
+          .then(res => {
+            const data = res.data
+            if(data.code === 1) {
+              console.log('获取 token 成功', data.message)
+              setToken(app.globalData.token, data.data.token)
+            }
+          })
+          .catch(err => {
+            console.log('获取 token 失败', err.data.message)
+          })
+        }
+      },
+      fail: function (err) {
+        console.log('获取用户登录态失败！' + err.errMsg)
+        wx.showToast({
+          title: '获取用户登录态失败！',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+  getUserInfo: function() {
+    removeToken(app.globalData.userToken)
+    if(app.globalData.code) {
+      // 调用获取用户信息接口
+      wx.getUserInfo({
+        success: res => {
+          console.log('获取用户信息成功', res)
+          wx.redirectTo({
+            url: '../index/index'
+          })
+          app.globalData.userInfo = res.userInfo
+          setToken(app.globalData.userToken, app.globalData.userInfo)
+          this.updateToken()
+        },
+        fail: function () {
+          console.log('获取用户信息失败')
+        }
+      })
+    }
+  },
+  jxfwLogin: function() {
+    const header = {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       'Cookie': this.data.setCookies
     }
     postAction(this.data.loginUrl, this.data.user, header)
     .then(res => {
-      console.log('登录成功 :>>', res)
-      wx.redirectTo({
-        url: '../index/index',
-      })
+      if(res.data.code === 0) { 
+        console.log('登录成功 :>>', res)
+      } else {
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
     .catch(err => {
       console.log('登录失败 :>>', err)

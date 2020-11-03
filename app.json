@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/issue/issue",
     "pages/chat/chat",
     "pages/message/message",
     "pages/index/index",
-    "pages/login/login",
     "pages/serach/serach",
     "pages/mine/mine"
   ],

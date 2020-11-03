@@ -19,6 +19,6 @@
       </view>
       <image class="code_img" src="{{ codeImg }}" bindtap="updateCode"></image>
     </view>
-    <button bindtap="login">登录</button>
+    <button bindtap="jxfwLogin" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
   </view>
 </view>

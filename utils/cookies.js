@@ -1,11 +1,11 @@
 const setToken = (key, data) => {
-  wx.setStorageSync({
+  wx.setStorage({
     key: key,
     data: data
   })
 }
 const getToken = (key) => {
-  wx.getStorageSync({
+  wx.getStorage({
     key: key,
     success (res) {
       console.log(res.data)
@@ -13,7 +13,7 @@ const getToken = (key) => {
   })
 }
 const removeToken = (key) => {
-  wx.removeStorageSync({
+  wx.removeStorage({
     key: key,
     success (res) {
       console.log(res)
