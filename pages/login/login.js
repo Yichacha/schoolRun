@@ -3,7 +3,6 @@ import { postAction, getAction } from '../../api/requests.js'
 
 //获取应用实例
 const app = getApp()
-// const util = require('../../utils/util.js')
 
 Page({
   data: {
@@ -12,6 +11,7 @@ Page({
       pwd: '',
       verifycode: ''
     },
+    userStatus: false, // 是否登录成功
     snoIsFoucs: false,
     pwdIsFoucs: false,
     codeIsFocus: false,
@@ -136,23 +136,31 @@ Page({
     })
   },
   getUserInfo: function() {
-    removeToken(app.globalData.userToken)
     if(app.globalData.code) {
-      // 调用获取用户信息接口
-      wx.getUserInfo({
-        success: res => {
-          console.log('获取用户信息成功', res)
-          wx.redirectTo({
-            url: '../index/index'
-          })
-          app.globalData.userInfo = res.userInfo
-          setToken(app.globalData.userToken, app.globalData.userInfo)
-          this.updateToken()
-        },
-        fail: function () {
-          console.log('获取用户信息失败')
-        }
-      })
+      // 登录成功，调用获取用户信息接口
+      if(this.data.userStatus) {
+        removeToken(app.globalData.userToken)
+        removeToken(app.globalData.token)
+        wx.getUserInfo({
+          success: res => {
+            console.log('获取用户信息成功', res)
+            wx.showToast({
+              title: '登录成功~',
+              icon: 'loading',
+              duration: 2000
+            })
+            wx.redirectTo({
+              url: '../index/index'
+            })
+            app.globalData.userInfo = res.userInfo
+            setToken(app.globalData.userToken, app.globalData.userInfo)
+            this.updateToken()
+          },
+          fail: function () {
+            console.log('获取用户信息失败')
+          }
+        })
+      }
     }
   },
   jxfwLogin: function() {
@@ -164,6 +172,7 @@ Page({
     .then(res => {
       if(res.data.code === 0) { 
         console.log('登录成功 :>>', res)
+        this.data.userStatus = true // 信息正确，登录成功
       } else {
         wx.showToast({
           title: res.data.message,
