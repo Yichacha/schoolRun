@@ -8,9 +8,9 @@
       <input class="sno_input" bindfocus="snoFoucs" bindblur="snoBlur"></input>
     </view>
     <view class="pwd_container">
-      <text class="{{ pwdIsFoucs ? 'pwd_txt float' : 'pwd_txt' }}">{{ pwdIsFoucs ? '密码' : '密码（初始密码为身份证后六位）' }}</text>
+      <text class="{{ pwdIsFoucs ? 'pwd_txt float' : 'pwd_txt' }}">密码</text>
       <input type="{{ showPwd ? 'text' : 'password' }}" class="pwd_input" bindfocus="pwdFoucs" bindblur="pwdBlur" bindinput="inputPwd"></input>
-      <image wx:if="{{ inputPwd }}" src="{{ showPwd ? hiddenImg : showImg }}" bindtap="showHidden"></image>
+      <image wx:if="{{ inputPwd }}" src="{{ showPwd ? showImg : hiddenImg }}" bindtap="showHidden"></image>
     </view>
     <view class="code_container">
       <view class="code">

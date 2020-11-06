@@ -10,7 +10,7 @@
   height: 900rpx;
   border-radius: 50%;
   position: absolute;
-  top: -600rpx;
+  top: -630rpx;
   left: -400rpx;
 }
 .login .login_container .login_txt {
