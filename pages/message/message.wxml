@@ -1,17 +1,10 @@
 <view class="message">
-  <view class="message_container">
-    <view class="avatar_container">
-      <image class="avatar" src="../../assets/images/avatar.jpg"></image>
-      <text class="unmsg_sum">99+</text>
-    </view>
-    <view class="content_container">
-      <view class="user_info">
-        <text class="user_name">他的ID</text>
-        <text class="accept_time">5分钟前</text>
-      </view>
-      <view class="msg_container">
-        文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案
-      </view>
-    </view>
-  </view>
+  <card
+    avatar="{{user.avatar}}"
+    userName="{{user.userName}}"
+    lastChat="{{user.lastChat}}"
+    unReadNum="{{user.unReadNum}}"
+    lastTime="{{user.lastTime}}"
+    bindtap="enterChat"
+  ></card>
 </view>

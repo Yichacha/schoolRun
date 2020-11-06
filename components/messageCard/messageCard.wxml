@@ -1,0 +1,15 @@
+<view class="message_container">
+  <view class="avatar_container">
+    <image class="avatar" src="{{ avatar }}"></image>
+    <text class="unmsg_sum" wx:if="{{ unReadNum !== 0 }}">{{ unReadNum < 99 ? unReadNum : unReadNum + "+" }}</text>
+  </view>
+  <view class="content_container">
+    <view class="user_info">
+      <text class="user_name">{{ userName }}</text>
+      <text class="accept_time">{{ lastTime }}</text>
+    </view>
+    <view class="msg_container">
+      {{ lastChat }}
+    </view>
+  </view>
+</view>

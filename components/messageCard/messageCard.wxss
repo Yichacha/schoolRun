@@ -1,0 +1,62 @@
+.message_container {
+  height: 94rpx;
+  padding: 32rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  border-top: 2rpx solid #F0F0F0;
+}
+.message_container:last-child {
+  border-bottom: 2rpx solid #F0F0F0;
+}
+.message_container .avatar_container {
+  margin-right: 28rpx;
+  width: 96rpx;
+  position: relative;
+}
+.message_container .avatar_container .avatar {
+  height: 96rpx;
+  width: 96rpx;
+  border-radius: 50%;
+}
+.message_container .avatar_container .unmsg_sum {
+  height: 34rpx;
+  line-height: 34rpx;
+  border-radius: 17rpx;
+  padding: 0 10rpx;
+  text-align: left;
+  position: absolute;
+  right: -10rpx;
+  background-color: #EA5656;
+  font: 300 22rpx 'Segoe UI';
+  color: #FFFFFF;
+}
+
+.message_container .content_container {
+  width: 564rpx;
+}
+.message_container .content_container .user_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.message_container .content_container .user_info .user_name {
+  color: #666666;
+  font: 500 30rpx 'Segoe UI';
+  line-height: 40rpx;
+}
+.message_container .content_container .user_info .accept_time {
+  color: #999999;
+  font: 400 22rpx 'Segoe UI';
+  line-height: 30rpx;
+}
+
+
+.message_container .content_container .msg_container {
+  color: #999999;
+  font: 300 28rpx 'Segoe UI';
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
