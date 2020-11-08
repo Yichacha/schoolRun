@@ -1,4 +1,4 @@
-<view class="order-item" wx:for="{{6}}" wx:key="index">
+<view class="order-item">
   <view class="user-info">
     <view class="user-avator">
       <image src="../../assets/tabarImages/niumang.png"></image>

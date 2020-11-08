@@ -28,7 +28,9 @@
   </view>
   <!-- 订单list -->
   <view class="home-orderList" wx:if="{{orderList.length!=0}}">
-    <order-item searchKey='{{serachValue}}' order='{{order}}'></order-item>
+    <view class="order-view" wx:for="{{5}}" wx:key="index">
+      <order-item searchKey='{{serachValue}}' order='{{order}}'></order-item>
+    </view>
   </view>
   <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>
 </view>
