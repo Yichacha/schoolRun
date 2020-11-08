@@ -114,10 +114,10 @@ Page({
             }
           )
           .then(res => {
-            const data = res.data
-            if(data.code === 1) {
-              console.log('获取 token 成功', data.message)
-              setToken(app.globalData.token, data.data.token)
+            if(res.data.code === 1) {
+              console.log('获取 token 成功', res)
+              setToken(app.globalData.token, res.data.data.token)
+              setToken('USERID', res.data.data.id)
             }
           })
           .catch(err => {
