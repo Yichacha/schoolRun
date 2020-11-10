@@ -1,0 +1,37 @@
+<view class="chat">
+  <view class="notice_container">
+    <text class="notice_txt">诚信接单~~~~~~~</text>
+    <button class="notice_btn">确认接单</button>
+  </view>
+  <view class="content_container">
+    <scroll-view class="content" scroll-y="true" scroll-top="{{ scrollTop }}">
+      <view wx:for="{{msgList}}" wx:key="index" class="msg_container">
+        <view class="to list" wx:if="{{ item.fromUserId !== options.fromUserId }}">
+          <image class="avatar" src="../../assets/images/avatar.jpg"></image>
+          <view class="triangle"></view>
+          <view class="msg">
+            <view>
+              {{ item.messageContent }}
+            </view>
+          </view>
+        </view>
+        <view class="from list" wx:else>
+          <view class="msg">
+            <text class="readSign" style="{{ hasRead ? 'color: #999999' : 'color: #FFA851'}}">
+              {{ hasRead ? '已读' : '未读' }}
+            </text>
+            <view>
+              {{ item.messageContent }}
+            </view>
+          </view>
+          <view class="triangle"></view>
+          <image class="avatar" src="../../assets/images/avatar.jpg"></image>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="edit_container" style="padding-bottom:{{ editBottom }}">
+    <input class="edit" placeholder="点击输入" bindfocus="editFocus" bindblur="editBlur" bindinput="getInput" adjust-position="{{false}}"></input>
+    <text class="send" style="{{ value ? 'color: #FFA851' : 'color: #999999' }}" bindtap="send">发送</text>
+  </view>
+</view>

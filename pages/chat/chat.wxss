@@ -1,0 +1,126 @@
+.chat {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 通知条 */
+.chat .notice_container {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFE7CF;
+  opacity: .78;
+  height: 76rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+.chat .notice_container .notice_txt {
+  color: #999999;
+  font: 32rpx PingFangSC-Regular;
+  line-height: 56rpx;
+}
+.chat .notice_container .notice_btn {
+  color: #FFA851;
+  border: 2rpx solid #FFA851;
+  background-color: #FFE7CF;
+  border-radius: 30rpx;
+  width: 160rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font: 28rpx PingFangSC-Regular;
+  padding: 0;
+  margin: 0;
+}
+
+/* 内容区 */
+.chat .content_container {
+  flex: 1;
+  overflow-y: auto;
+}
+.chat .content_container .content {
+  height: 100%;
+}
+.chat .content_container .content .msg_container .list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 160rpx 16rpx 30rpx;
+}
+.chat .content_container .content .msg_container .from {
+  padding: 16rpx 30rpx 16rpx 160rpx;
+}
+.chat .content_container .content .msg_container .list .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 6rpx;
+}
+.chat .content_container .content .msg_container .from .avatar {
+  margin-left: 6rpx;
+}
+.chat .content_container .content .msg_container .list .triangle {
+  width: 0;
+  height: 0;
+  border-width: 10rpx 10rpx 10rpx 0;
+  border-style: solid;
+  border-color: transparent #F5F5F5 transparent transparent;
+}
+.chat .content_container .content .msg_container .from .triangle {
+  border-width: 10rpx 0 10rpx 10rpx;
+  border-color: transparent transparent transparent #F5F5F5;
+}
+.chat .content_container .content .msg_container .list .msg {
+  flex: 1;
+}
+.chat .content_container .content .msg_container .from .msg {
+  text-align: right;
+}
+.chat .content_container .content .msg_container .list .msg view{
+  max-width: 360rpx;
+  background-color: #F5F5F5;
+  color: #666666;
+  font: 28rpx PingFangSC-Regular;
+  line-height: 40rpx;
+  display: inline-block;
+  border-radius: 12rpx;
+  padding: 12rpx 22rpx;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.chat .content_container .content .msg_container .from .msg .readSign {
+  display: inline-block;
+  font: 20rpx PingFangSC-Regular;
+  padding-right: 10rpx;
+}
+
+/* 输入框和发送按钮 */
+.chat .edit_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 120rpx;
+  color: #999999;
+  padding: 0 30rpx;
+  border-top: 2rpx solid #EFEFEF;
+}
+.chat .edit_container .edit {
+  width: 560rpx;
+  height: 76rpx;
+  background-color: #F5F5F5;
+  border-radius: 52rpx;
+  font: 28rpx PingFangSC-Regular;
+  line-height: 56rpx;
+  padding-left: 32rpx;
+}
+.chat .edit_container .send {
+  font: 30rpx PingFangSC-Regular;
+  line-height: 56rpx;
+}
