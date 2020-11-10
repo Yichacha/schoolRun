@@ -1,5 +1,7 @@
 import { getToken, setToken, removeToken } from '../../utils/cookies.js'
 import { postAction, getAction } from '../../api/requests.js'
+import { getMsgListApi } from '../../api/api.js'
+const app = getApp()
 
 Page({
 
@@ -7,12 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user: {
-      avatar: '../../assets/images/avatar.jpg',
-      userName: '他的ID',
-      lastChat: '文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案文案',
-      unReadNum: 99,
-      lastTime: '5分钟前'
+    msgList: [],
+    options: {
+      page: 1,
+      size: 10
     }
   },
 
@@ -65,9 +65,25 @@ Page({
 
   },
   getMsgList: function() {
-    getAction(this.data.msgUrl)
+    let header = {
+      'Authorization': getToken(app.globalData.token)
+    }
+    getMsgListApi(this.data.options, header)
     .then(res => {
-      console.log(res)
+      if(res.data.code === 1) {
+        console.log('获取聊天列表成功 :>>', res.data.data.list)
+        this.setData({
+          msgList: res.data.data.list
+        })
+        console.log(this.data.msgList)
+      } else {
+        wx.showToast({
+          title: '获取聊天列表失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+      
     })
     .catch(err => {
       console.log(err)

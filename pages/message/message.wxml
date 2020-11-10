@@ -1,10 +1,8 @@
 <view class="message">
   <card
-    avatar="{{user.avatar}}"
-    userName="{{user.userName}}"
-    lastChat="{{user.lastChat}}"
-    unReadNum="{{user.unReadNum}}"
-    lastTime="{{user.lastTime}}"
+    wx:for="{{msgList}}"
+    wx:key="index"
+    msgList="{{item}}"
     bindtap="enterChat"
   ></card>
 </view>

@@ -1,7 +1,66 @@
 import { getToken, setToken, removeToken } from './utils/cookies.js'
+import myWebSocket from "./utils/webSocket"
+
 App({
   onLaunch: function() {
     this.login()
+    this.websocket = new myWebSocket({ heartCheck: true, isReconnect: true });
+    let connetObj = {
+      url: `wss://www.vtmer2018.top/campus_runrun`,
+      success(res) {
+        console.log("connect", res)
+      }
+    }
+    // 连接 socket
+    this.websocket.connectSocket(connetObj);
+    // 监听网络变化
+    this.websocket.onNetworkChange(connetObj)
+    // 监听 socket 的关闭
+    this.websocket.onSocketClose(connetObj);
+    // 监听服务端信息的传送
+    this.websocket.onSocketMessage((data) => {
+      console.log("接收到服务端的消息", data)
+      try {
+        var msg = JSON.parse(data.data)
+      } catch (error) {}
+      if(!msg) return;   // 无信息直接返回
+      if(!msg.data) {   // 发送成功的相应
+        this.globalData.response = true;
+      } else { // 有人发消息，如果是自己发给自己无需做出相应
+        // if(msg.data.fromUserId == msg.data.toUserId) return;
+        this.globalData.msgData = msg.data;
+      }
+    })
+  },
+  onHide() {
+    // 选择图片的时候不需要断开
+    if(this.globalData.isnotClose) return;
+    try {
+      this.websocket.closeSocket();
+    } catch (error) {}
+  },
+  onShow() {
+    this.websocket.connectSocket({
+      url: `wss://www.vtmer2018.top/campus_runrun`,
+      success(res){
+        console.log("connect", res)
+      }
+    });
+  },
+  // 监听全局变量消息列表
+  watch(attr, value, method){
+    Object.defineProperty(this.globalData, attr, {
+      configurable: true,
+      enumerable: true,
+      set(newValue){
+        // 没有改变无需执行
+        if(value == newValue) return;
+        method(newValue)
+      },
+      get(){
+        return value;
+      }
+    })
   },
   login: function() {
     wx.login({
@@ -50,6 +109,7 @@ App({
   globalData: {
     userInfo: null,
     code: '', // 验证码
+    userId: 'USERID',
     token: 'ACCESS_TOKEN',
     userToken: 'USERINFO',
     serachKey: '' // 搜索的关键字

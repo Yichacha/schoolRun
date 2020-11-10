@@ -1,5 +1,6 @@
 import { getToken, setToken, removeToken } from '../../utils/cookies.js'
 import { postAction, getAction } from '../../api/requests.js'
+import { jxfwLoginApi, getCodeApi, loginApi } from '../../api/api.js'
 
 //获取应用实例
 const app = getApp()
@@ -16,7 +17,6 @@ Page({
     pwdIsFoucs: false,
     codeIsFocus: false,
     showPwd: false,
-    pwdExist: false,
     hiddenImg: '../../assets/images/hidden.png',
     showImg: '../../assets/images/show.png',
     loginUrl: 'https://jxfw.gdut.edu.cn/new/login',
@@ -47,7 +47,6 @@ Page({
     }
   },
   pwdBlur: function(e) {
-    this.data.user.pwd = e.detail.value
     if(this.data.user.pwd === '') {
       this.setData({
         pwdIsFoucs: false
@@ -68,15 +67,9 @@ Page({
     }
   },
   inputPwd: function(e) {
-    if(e.detail.value) {
-      this.setData({
-        inputPwd: true
-      })
-    } else {
-      this.setData({
-        inputPwd: false
-      })
-    }
+    this.setData({
+      ['user.pwd']: e.detail.value
+    })
   },
   showHidden: function() {
     this.setData({
