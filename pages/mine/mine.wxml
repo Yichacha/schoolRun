@@ -1,5 +1,40 @@
 <view class="mine">
-  我的
+  <view class="user-info">
+    <image src="/assets/images/avatar.jpg" class="user-avator"></image>
+    <view class="user-name">花花</view>
+  </view>
+  <view class="mine-order-info">
+    <van-tabs active="{{ tabActive }}" bind:change="tagChange" color="#FCA44B">
+      <van-tab title='订单 {{num}}'>
+        <view class="my-order">
+          <view class="order-view" wx:for="{{1}}" wx:key="index">
+            <order-item order="{{order}}"></order-item>
+          </view>
+        </view>
+      </van-tab>
+      <van-tab title="接单 {{num}}">
+        <view class="my-order">
+          <view class="order-view" wx:for="{{10}}" wx:key="index">
+            <order-item order="{{order}}"></order-item>
+          </view>
+        </view>
+      </van-tab>
+      <van-tab title="评价 {{num}}">
+        <view class="comment-list">
+          <view class="comment-item" wx:for="{{10}}" wx:key="index">
+            <view class="user">
+              <image src="/assets/images/avatar.jpg"></image>
+              <view class="user-name">我是ID我是ID</view>
+              <view class="comment-date">11.20</view>
+            </view>
+            <view class="comment-content">
+              评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
+            </view>
+          </view>
+        </view>
+      </van-tab>
+    </van-tabs>
+  </view>
 </view>
-<import src="../../templates/tabar/tabar.wxml"/>
-<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
+<import src="../../templates/tabar/tabar.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

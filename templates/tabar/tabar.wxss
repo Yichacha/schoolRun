@@ -1,6 +1,6 @@
 .icon{
-  width:54rpx;
-  height: 54rpx;
+  width:40rpx;
+  height: 40rpx;
 }
 .tabBar{
   width:100%;
@@ -26,9 +26,9 @@
 }
 .home-publish image{
   z-index: 999;
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   position:fixed;
-  bottom:60rpx;
+  bottom:50rpx;
   transform: translate(-50%, 0);
 }
