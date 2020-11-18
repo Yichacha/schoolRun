@@ -6,14 +6,14 @@ function tabbarinit() {
          "pagePath": "/pages/index/index",
          "iconPath": "/assets/tabarImages/home.png",
          "selectedIconPath": "/assets/tabarImages/homeActive.png",
-         "text": "首页"
+        //  "text": "首页"
        },
        {
          "current": 0,
          "pagePath": "/pages/mine/mine",
          "iconPath": "/assets/tabarImages/mine.png",
          "selectedIconPath": "/assets/tabarImages/mineActive.png",
-         "text": "我的"
+        //  "text": "我的"
        }
      ]
  

@@ -7,7 +7,7 @@
     <view class="tabBar-item">
       <navigator open-type="redirect" url="{{item.pagePath}}">
         <view><image class="icon" src='{{item.iconPath}}'></image></view>
-        <view class="{{item.current== 1 ? 'tabBartext' :''}}">{{item.text}}</view>
+        <view class="{{item.current== 1 ? 'tabBartext' :''}}"></view>
       </navigator>  
     </view>
   </block>

@@ -1,6 +1,3 @@
-page {
-  background-color: #fff8f1;
-}
 .mine {
   width: 100%;
   color: #707070;
@@ -20,49 +17,91 @@ page {
 }
 .mine .mine-order-info {
   width: 100%;
-  padding-top: 40rpx;
+  padding-top: 20rpx;
   background-color: #fff;
   border-radius: 36rpx 36rpx 0 0;
   box-shadow: 0 -2rpx 15rpx rgba(165, 160, 160, 0.5);
-  position: fixed;
-  top: 320rpx;
 }
 .mine .mine-order-info .my-order {
-  height: 650rpx;
-  padding-bottom: 50rpx;
+  padding-bottom: 100rpx;
   box-sizing: border-box;
-  overflow: auto;
 }
 .mine .mine-order-info .my-order .order-view {
   border: 1rpx solid #F2F2F2;
 }
 .mine .mine-order-info .comment-list {
-  height: 620rpx;
-  overflow: auto;
-  padding-bottom: 50rpx;
+  padding-bottom: 100rpx;
 }
-.mine .mine-order-info .comment-list .comment-item {
-  font-size: 30rpx;
-  padding: 24rpx;
-  box-sizing: border-box;
-  border: 1rpx solid #E4E4E4;
+.mine van-overlay van-transition view {
+  background-color: rgba(0, 0, 0, 0);
 }
-.mine .mine-order-info .comment-list .comment-item .user {
+.mine .shadow {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.mine .wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 24rpx;
+  justify-content: center;
+  height: 100%;
 }
-.mine .mine-order-info .comment-list .comment-item .user image {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  margin-right: 24rpx;
+.mine .block {
+  position: relative;
+  width: 670rpx;
+  height: 550rpx;
+  border-radius: 44rpx;
+  border-top: 8rpx solid #F7CBAE;
+  background-color: #fff;
+  padding: 40rpx 0;
+  box-sizing: border-box;
 }
-.mine .mine-order-info .comment-list .comment-item .user .user-name {
-  flex: 5;
+.mine .block .closeIcon {
+  width: 72rpx;
+  height: 72rpx;
+  position: absolute;
+  right: 0;
+  top: -108rpx;
 }
-.mine .mine-order-info .comment-list .comment-item .user .comment-date {
-  color: #BBBBBB;
-  font-size: 22rpx;
-  flex: 1;
+.mine .block .closeIcon::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 2rpx;
+  height: 36rpx;
+  background-color: #e7e5e4;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.mine .block .closeIcon image {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+.mine .block .order-start-time {
+  margin: 38rpx 0 70rpx 38rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+.mine .block .order-start-time text {
+  margin-left: 18rpx;
+}
+.mine .block .to-comment {
+  position: absolute;
+  display: inline-block;
+  font-size: 28rpx;
+  padding: 18rpx 70rpx;
+  background-color: #FCC39E;
+  color: #fff;
+  border-radius: 38rpx;
+  right: 68rpx;
+  bottom: 40rpx;
+}
+.mine .block .comment-input {
+  margin: 36rpx 34rpx;
+  font-size: 30rpx;
+  height: 250rpx;
+  color: #999999;
 }

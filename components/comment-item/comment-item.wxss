@@ -1,0 +1,29 @@
+.comment-item {
+  width: 100%;
+  font-size: 30rpx;
+  padding: 28rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #F2F2F2;
+}
+.comment-item .user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.comment-item .user image {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+}
+.comment-item .user .user-name {
+  flex: 5;
+}
+.comment-item .user .comment-date {
+  color: #BBBBBB;
+  font-size: 22rpx;
+  flex: 1;
+}
+.comment-item .comment-content {
+  line-height: 40rpx;
+}

@@ -62,8 +62,8 @@
   right: 0;
   top: 0;
   z-index: 100;
-  width: 40rpx;
-  height: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 .login .input_container .code_container {
   display: flex;

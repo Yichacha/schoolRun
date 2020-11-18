@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/message/message",
     "pages/chat/chat",
     "pages/login/login",
     "pages/mine/mine",
-    "pages/index/index",
     "pages/issue/issue",
     "pages/serach/serach"
   ],
@@ -16,6 +16,7 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "order-item": "/components/order-item/order-item"
+    "order-item": "/components/order-item/order-item",
+    "comment-item": "/components/comment-item/comment-item"
   }
 }

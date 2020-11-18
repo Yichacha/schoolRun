@@ -1,0 +1,10 @@
+<view class="comment-item">
+  <view class="user">
+    <image src="{{comment.avator?comment.avator:'/assets/images/avatar.jpg'}}"></image>
+    <view class="user-name">{{comment.userName}}</view>
+    <view class="comment-date">{{comment.createDate}}</view>
+  </view>
+  <view class="comment-content">
+    {{comment.comment}}
+  </view>
+</view>

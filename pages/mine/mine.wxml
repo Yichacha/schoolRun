@@ -7,21 +7,21 @@
     <van-tabs active="{{ tabActive }}" bind:change="tagChange" color="#FCA44B">
       <van-tab title='订单 {{num}}'>
         <view class="my-order">
-          <view class="order-view" wx:for="{{1}}" wx:key="index">
-            <order-item order="{{order}}"></order-item>
+          <view class="order-view" wx:for="{{orderList}}" wx:key="index">
+            <order-item order="{{item}}" bind:showOrderInfo="showOrderInfo"></order-item>
           </view>
         </view>
       </van-tab>
       <van-tab title="接单 {{num}}">
         <view class="my-order">
-          <view class="order-view" wx:for="{{10}}" wx:key="index">
-            <order-item order="{{order}}"></order-item>
+          <view class="order-view" wx:for="{{orderList}}" wx:key="index">
+            <order-item order="{{item}}" bind:showOrderInfo="showOrderInfo"></order-item>
           </view>
         </view>
       </van-tab>
       <van-tab title="评价 {{num}}">
         <view class="comment-list">
-          <view class="comment-item" wx:for="{{10}}" wx:key="index">
+          <!-- <view class="comment-item" wx:for="{{10}}" wx:key="index">
             <view class="user">
               <image src="/assets/images/avatar.jpg"></image>
               <view class="user-name">我是ID我是ID</view>
@@ -30,11 +30,40 @@
             <view class="comment-content">
               评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
             </view>
-          </view>
+          </view> -->
+          <comment-item wx:for="{{ commentContentList }}" comment="{{item}}" wx:key="index"></comment-item>
         </view>
       </van-tab>
     </van-tabs>
   </view>
+  <!-- 遮罩层组件 -->
+  <van-overlay show="{{ statusShowInfo }}">
+    <view class="shadow"></view>
+    <!-- 点击“已完成”或“未完成”出现的对话框 -->
+    <view class="wrapper" wx:if="{{!toComent}}">
+      <view class="block" catch:tap="noop">
+        <view class="closeIcon" bindtap="onClickHide">
+          <image src="/assets/images/close.png"></image>
+        </view>
+        <order-item order="{{chosedOrder}}"></order-item>
+        <view class="order-start-time">订单开始时间 <text> 11.1 {{chosedOrder.time1}}</text></view>
+        <view class="to-comment" bindtap="showComment">订单评价</view>
+      </view>
+    </view>
+    <!-- 点击订单评价出现的对话框 -->
+    <view class="wrapper" wx:if="{{toComent}}">
+      <view class="block" catch:tap="noop">
+        <view class="closeIcon" bindtap="backToInfo">
+          <image src="/assets/images/close.png"></image>
+        </view>
+        <!-- <van-cell-group class="input-group">
+          <van-field model:value="{{ value }}" placeholder="聊聊这次跑腿服务的感受" border="{{ false }}" maxlength="100"  placeholder-class="place-holder"/>
+        </van-cell-group> -->
+        <textarea model:value="{{commentContent}}" class="comment-input" maxlength="100" placeholder="聊聊这次跑腿服务的感受"></textarea>
+        <view class="to-comment" bindtap="toComment">发表评价</view>
+      </view>
+    </view>
+  </van-overlay>
 </view>
 <import src="../../templates/tabar/tabar.wxml" />
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
