@@ -1,11 +1,9 @@
 //获取应用实例
 const app = getApp()
-// import {
-//   getToken
-// } from '../../utils/cookies.js'
 import {
-  formatTimeTwo
-} from '../../utils/util.js'
+  getAction
+} from '../../api/requests.js'
+
 var tabar = require('../../templates/tabar/tabar.js');
 Page({
   data: {
@@ -40,25 +38,7 @@ Page({
       },
     ],
     serachValue: '', // 搜索关键字
-    orderList: [{
-      value: 1
-    }], // 订单列表
-    order: {
-      userName: '花花',
-      createTime: '3分钟前',
-      orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
-      address1: '六饭',
-      address2: '东十三',
-      time1: '23:20',
-      time2: '23:40',
-      money: '5'
-    }
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../index/index'
-    })
+    orderList: [], // 订单列表
   },
   onShow() {
     this.setData({ // 将暂存在全局的搜索关键字保存在searchValue中
@@ -88,9 +68,18 @@ Page({
   noop() {},
   // 获取首页订单数据
   getOrderList() {
-    let time1 = formatTimeTwo(1488481383, 'M-D h:m')
-    let time2 = formatTimeTwo(1604387662, 'h:m')
-    console.log('转换后的时间：' + ' ' + time1 + ' ' + time2)
+    console.log('获取首页数据')
+    getAction('/api/errand/show', {
+      page: 1,
+      size: 4
+    }).then(res => {
+      if (res.data.code === 1) {
+        this.setData({
+          orderList: res.data.data.list,
+        })
+        console.log(this.data.orderList)
+      }
+    })
   },
 
 
