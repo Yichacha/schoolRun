@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from '../../utils/cookies.js'
 import { postAction, getAction } from '../../api/requests.js'
-import { jxfwLoginApi, getCodeApi, loginApi } from '../../api/api.js'
+import { jxfwLoginApi, getCodeApi } from '../../api/api.js'
 
 //获取应用实例
 const app = getApp()
@@ -19,8 +19,6 @@ Page({
     showPwd: false,
     hiddenImg: '../../assets/images/hidden.png',
     showImg: '../../assets/images/show.png',
-    loginUrl: 'https://jxfw.gdut.edu.cn/new/login',
-    codeUrl: 'https://jxfw.gdut.edu.cn/yzm?d=1603814815275', // 验证码接口
     tokenUrl: '/login/wxMiniProGramLogin',
     setCookies: '', // 验证码接口返回的 set-cookies
     codeImg: '' // 验证码 base64
@@ -77,25 +75,20 @@ Page({
     })
   },
   updateCode: function() {
-    this.getCode()
+    this.getCode({}, {}, 'arraybuffer')
   },
-  getCode: function() {
-    getAction(this.data.codeUrl, {}, {}, 'arraybuffer')
-    .then(res => {
-      console.log('获取验证码成功 :>>', res)
-      let base64 = wx.arrayBufferToBase64(res.data)
-      this.setData({
-        codeImg: " data:image/jpeg;base64," + base64,
-        setCookies: res.cookies[0]
-      })
-    })
-    .catch(err => {
-      console.log('获取验证码失败 :>>', err)
+  async getCode() {
+    const res = await getCodeApi({}, {}, 'arraybuffer')
+    console.log('获取验证码成功 :>>', res)
+    let base64 = wx.arrayBufferToBase64(res.data)
+    this.setData({
+      codeImg: " data:image/jpeg;base64," + base64,
+      setCookies: res.cookies[0]
     })
   },
-  updateToken: function() {
+  updateToken() {
     wx.login({
-      success: res => {
+      success: (res) => {
         app.globalData.code = res.code
         if (app.globalData.code) {
           console.log('获取用户登录态成功！' + res.errMsg)
@@ -134,48 +127,55 @@ Page({
       if(this.data.userStatus) {
         removeToken(app.globalData.userToken)
         removeToken(app.globalData.token)
-        wx.getUserInfo({
-          success: res => {
-            console.log('获取用户信息成功', res)
-            wx.showToast({
-              title: '登录成功~',
-              icon: 'loading',
-              duration: 2000
-            })
-            wx.redirectTo({
-              url: '../index/index'
-            })
-            app.globalData.userInfo = res.userInfo
-            setToken(app.globalData.userToken, app.globalData.userInfo)
-            this.updateToken()
-          },
-          fail: function () {
-            console.log('获取用户信息失败')
+        wx.getSetting({
+          success: (res) => {
+            if (res.authSetting['scope.userInfo']) {
+              wx.getUserInfo({
+                success: res => {
+                  console.log('获取用户信息成功', res)
+                  wx.showToast({
+                    title: '登录成功~',
+                    icon: 'loading',
+                    duration: 2000
+                  })
+                  wx.redirectTo({
+                    url: '../index/index'
+                  })
+                  app.globalData.userInfo = res.userInfo
+                  setToken(app.globalData.userToken, app.globalData.userInfo)
+                  this.updateToken()
+                },
+                fail: function () {
+                  console.log('获取用户信息失败')
+                }
+              })
+            } else {
+              wx.showToast({
+                title: '请同意微信授权',
+                icon: 'none'
+              })
+            }
           }
         })
       }
     }
   },
-  jxfwLogin: function() {
+  async jxfwLogin() {
     const header = {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       'Cookie': this.data.setCookies
     }
-    postAction(this.data.loginUrl, this.data.user, header)
-    .then(res => {
-      if(res.data.code === 0) { 
-        console.log('登录成功 :>>', res)
-        this.data.userStatus = true // 信息正确，登录成功
-      } else {
-        wx.showToast({
-          title: res.data.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
-    .catch(err => {
-      console.log('登录失败 :>>', err)
-    })
+    const res = await jxfwLoginApi(this.data.user, header)
+    if(res.data.code === 0) { 
+      console.log('登录成功 :>>', res)
+      this.data.userStatus = true // 信息正确，登录成功
+    } else {
+      wx.showToast({
+        title: res.data.message,
+        icon: 'none',
+        duration: 2000
+      })
+      console.log('登录失败 :>>', res)
+    }
   }
 })
