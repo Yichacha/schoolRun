@@ -71,8 +71,10 @@ Page({
     console.log('获取首页数据')
     getAction('/api/errand/show', {
       page: 1,
-      size: 4
+      size: 4,
+      content: ''
     }).then(res => {
+      console.log(res)
       if (res.data.code === 1) {
         this.setData({
           orderList: res.data.data.list,

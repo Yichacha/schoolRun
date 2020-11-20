@@ -28,7 +28,7 @@
     </view>
     <view class="order-requestTime">  {{time1}} - {{time2}}</view>
     <view class="order-toChat">
-      <image src="../../assets/tabarImages/liaotian.png"></image>
+      <navigator url="/pages/chat/chat?id={{order.id}}"><image src="../../assets/tabarImages/liaotian.png"></image></navigator>
     </view>
   </view>
 </view>
