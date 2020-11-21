@@ -5,7 +5,7 @@
   </view>
   <view class="info_container">
     <view class="fee_input">
-      <text>逾期费用</text>
+      <text>预期费用</text>
       <view class="fee">
         <image src="../../assets/images/money.png"></image>
         <input class="fee_time" maxlength="2" bindblur="feeBlur"></input>
@@ -14,9 +14,9 @@
     <view class="time_input">
       <text>期待时间</text>
       <view class="time">
-        <text class="fee_time" bindtap="showPicker" data-value="{{ 0 }}">{{ startDate }}</text>
+        <text class="fee_time" bindtap="showPicker" data-value="{{ 0 }}">{{ expectStartTimeString }}</text>
         <text>-</text>
-        <text class="fee_time" bindtap="showPicker" data-value="{{ 1 }}">{{ endDate }}</text>
+        <text class="fee_time" bindtap="showPicker" data-value="{{ 1 }}">{{ expectEndTimeString }}</text>
       </view>
     </view>
     <view class="origin_input">
