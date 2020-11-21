@@ -96,7 +96,8 @@ Page({
             this.data.tokenUrl,
             {
               code: app.globalData.code,
-              username: app.globalData.userInfo.nickName
+              username: app.globalData.userInfo.nickName,
+              headPortrait: app.globalData.userInfo.avatarUrl
             }
           )
           .then(res => {
@@ -133,14 +134,6 @@ Page({
               wx.getUserInfo({
                 success: res => {
                   console.log('获取用户信息成功', res)
-                  wx.showToast({
-                    title: '登录成功~',
-                    icon: 'loading',
-                    duration: 2000
-                  })
-                  wx.redirectTo({
-                    url: '../index/index'
-                  })
                   app.globalData.userInfo = res.userInfo
                   setToken(app.globalData.userToken, app.globalData.userInfo)
                   this.updateToken()
@@ -169,6 +162,14 @@ Page({
     if(res.data.code === 0) { 
       console.log('登录成功 :>>', res)
       this.data.userStatus = true // 信息正确，登录成功
+      wx.showToast({
+        title: '登录成功~',
+        icon: 'loading',
+        duration: 2000
+      })
+      wx.redirectTo({
+        url: '../index/index'
+      })
     } else {
       wx.showToast({
         title: res.data.message,
