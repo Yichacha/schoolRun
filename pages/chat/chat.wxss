@@ -45,6 +45,12 @@
 .chat .content_container .content {
   height: 100%;
 }
+.chat .content_container .content .more {
+  text-align: center;
+  margin-top: 80rpx;
+  color: #999999;
+  font: 28rpx PingFangSC-Regular;
+}
 .chat .content_container .content .msg_container .list {
   display: flex;
   flex-direction: row;
@@ -94,11 +100,11 @@
   word-wrap: break-word;
   word-break: break-all;
 }
-.chat .content_container .content .msg_container .from .msg .readSign {
+/* .chat .content_container .content .msg_container .from .msg .readSign {
   display: inline-block;
   font: 20rpx PingFangSC-Regular;
   padding-right: 10rpx;
-}
+} */
 
 /* 输入框和发送按钮 */
 .chat .edit_container {

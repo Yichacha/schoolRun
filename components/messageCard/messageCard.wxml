@@ -1,11 +1,11 @@
 <view class="message_container">
   <view class="avatar_container">
     <image class="avatar" src="{{ content.headPortrait }}"></image>
-    <text class="unmsg_sum" wx:if="{{ content.whetherRead }}">{{ unReadNum < 99 ? unReadNum : unReadNum + "+" }}</text>
+    <text class="unmsg_sum" wx:if="{{ !content.whetherRead }}"></text>
   </view>
   <view class="content_container">
     <view class="user_info">
-      <text class="user_name">{{ content.name }}</text>
+      <text class="user_name">{{ content.username }}</text>
       <text class="accept_time">{{ content.updateTime }}</text>
     </view>
     <view class="msg_container">

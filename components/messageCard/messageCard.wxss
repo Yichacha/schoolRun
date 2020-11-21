@@ -20,9 +20,8 @@
   border-radius: 50%;
 }
 .message_container .avatar_container .unmsg_sum {
-  height: 34rpx;
-  line-height: 34rpx;
-  border-radius: 17rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
   padding: 0 10rpx;
   text-align: left;
   position: absolute;

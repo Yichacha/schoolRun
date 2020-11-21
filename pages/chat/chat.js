@@ -1,5 +1,6 @@
 import { getToken, setToken, removeToken } from '../../utils/cookies.js'
-import { postAction, getAction } from '../../api/requests.js'
+import { getPrivateRecordApi, setHasReadApi, confirmReceiveApi, confirmIssueApi } from '../../api/api.js'
+
 const app = getApp()
 
 Page({
@@ -8,46 +9,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    avatarUrl: '',
     hasRead: false,
     editBottom: 0, // 输入框容器的 bottom
     scrollTop: 0,
-    chatUrl: '/api/chatRecord/obtainRecordsPageByOppositeUserId',
-    readedUrl: '/api/chatRecord/setHasReadByRecordId',
     options: {
       fromUserId: '',
       page: 1,
       size: 10,
-      toUserId: 1
+      toUserId: ''
     },
+    toUserInfo: {},
     msgList: [],
-    value: ''
+    value: '' // 发送框的内容
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
-      ['options.fromUserId']: getToken(app.globalData.userId)
+      toUserInfo: options,
+      avatarUrl: app.globalData.userInfo.avatarUrl,
+      ['options.fromUserId']: getToken(app.globalData.userId),
+      ['options.toUserId']: options.toUserId
     })
     this.getRecord()
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-    }
-    // setTimeout(() => {
-    //   this.send()
-    // }, 5000)
-    // this.send()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.goBottom()
+    setTimeout(() => {
+      this.goBottom()
+    }, 500)
   },
 
   /**
@@ -65,23 +62,11 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    wx.closeSocket()
-    wx.showToast({
-      title: '连接已断开',
-      icon: "none",
-      duration: 2000
-    })
-  },
-
-  goBottom: function(e) {
+  goBottom: function() {
     const query = wx.createSelectorQuery()
     query.select('.content').boundingClientRect(rect => {
       this.setData({
-        scrollTop: e ? rect.bottom + e.detail.height : rect.bottom
+        scrollTop: rect.bottom + this.data.editBottom
       })
     }).exec()
   },
@@ -89,7 +74,7 @@ Page({
     this.setData({
       editBottom:  e.detail.height + 'px'
     })
-    this.goBottom(e)
+    this.goBottom()
   },
   editBlur: function() {
     this.setData({
@@ -106,35 +91,36 @@ Page({
     let header = {
       'Authorization': getToken(app.globalData.token)
     }
-    const { data: res } = await postAction(this.data.chatUrl, this.data.options, header)
-    this.setData({
-      msgList: this.data.msgList.concat(res.data.list)
-    })
-    console.log('获取聊天记录成功', this.data.msgList)
+    const { data: res } = await getPrivateRecordApi(this.data.options, header)
+    if(res.code === 1) {
+      this.setData({
+        msgList: this.data.msgList.concat(res.data.list)
+      })
+      console.log('获取聊天记录成功', this.data.msgList)
+    } else {
+      console.log('获取聊天记录失败')
+    }
   },
-  readRecord: function() {
+  async readRecord() {
     let header = {
       'Authorization': getToken(app.globalData.token)
     }
-    postAction(this.data.chatUrl, this.data.options, header)
-    .then(res => {
-      console.log('消息已读 :>>', res)
-      if(res.data.code === 1) {
-
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    const { data: res } = await setHasReadApi(this.data.options, header)
+    if(res.code === 1) {
+      this.setData({
+        hasRead: true
+      })
+      console.log('消息已读', res)
+    }
   },
   // 发送消息
   send(e){
-    var value = this.data.value;
-    var messageType = 1;
-    if(value == '') return;   // 如果是空数据不用发送
+    let value = this.data.value;
+    const messageType = 1;
+    if(value == '') return; // 如果是空数据不用发送
 
     const websocket = app.websocket
-    let data = websocket.getFormatData(1, this.data.options.fromUserId, 1 ,value, messageType, null);
+    let data = websocket.getFormatData(1, this.data.options.fromUserId, this.data.options.toUserId ,value, messageType, null);
     websocket.sendSocketMessage({
       data: data,
       success: (result) => {
@@ -152,12 +138,14 @@ Page({
   watchMsgList(){
     app.watch('msgData', {}, async (msgData) => {
       console.log("私聊页监听到消息列表变化", msgData);
-      if(msgData.fromUserId != this.myParam.toUserId) return;
+      if(msgData.fromUserId != this.data.options.toUserId) {
+        return
+      }
       this.data.msgList.push(msgData)
       this.setData({
         msgList: this.data.msgList
       })
-      let {data: res} = await updateRead(msgData.id)
+      let { data: res } = await setHasReadApi(msgData.id)
       console.log("发送已读", msgData.id, res)
     })
   },
@@ -168,5 +156,24 @@ Page({
       value: ''
     })
     this.goBottom()
+  },
+  fetchMoreRecords() {
+
+  },
+  async confirmReceive() {
+    let header = {
+      'Authorization': getToken(app.globalData.token),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    const res = await confirmReceiveApi(errandId, header)
+    console.log('确认接单', res)
+  },
+  async confirmIssue() {
+    let header = {
+      'Authorization': getToken(app.globalData.token),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    const res = await confirmReceiveApi(orderId, header)
+    console.log('确认订单', res)
   }
 })

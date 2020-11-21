@@ -1,7 +1,6 @@
 Component({
   properties: {
     msgList: Object, // 简写
-    unReadNum: Number,
   },
   observers: {
     'msgList': function() {
