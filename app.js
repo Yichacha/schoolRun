@@ -4,6 +4,8 @@ import myWebSocket from "./utils/webSocket"
 App({
   onLaunch: function() {
     this.login()
+
+    // weosocket 连接
     this.websocket = new myWebSocket({ heartCheck: true, isReconnect: true });
     let connetObj = {
       url: `wss://www.vtmer2018.top/campus_runrun`,
@@ -32,13 +34,7 @@ App({
       }
     })
   },
-  onHide() {
-    // 选择图片的时候不需要断开
-    if(this.globalData.isnotClose) return;
-    try {
-      this.websocket.closeSocket();
-    } catch (error) {}
-  },
+  // 小程序后台运行或息屏后，进入小程序时重新连接
   onShow() {
     this.websocket.connectSocket({
       url: `wss://www.vtmer2018.top/campus_runrun`,
@@ -107,6 +103,8 @@ App({
     }
   },
   globalData: {
+    response: false,
+    msgData: {},
     userInfo: null,
     code: '', // 验证码
     userId: 'USERID',
