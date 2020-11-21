@@ -1,7 +1,7 @@
 <view class="order-item" bindtap="">
   <view class="user-info">
     <view class="user-avator">
-      <image src="../../assets/tabarImages/niumang.png"></image>
+      <image src="{{order.headPortrait?order.headPortrait:'../../assets/tabarImages/niumang.png'}}"></image>
     </view>
     <text class="user-name">{{order.employerName}}</text>
     <text class="user-createTime">{{order.createTime}}</text>
@@ -28,7 +28,7 @@
     </view>
     <view class="order-requestTime">  {{time1}} - {{time2}}</view>
     <view class="order-toChat">
-      <navigator url="/pages/chat/chat?id={{order.id}}"><image src="../../assets/tabarImages/liaotian.png"></image></navigator>
+      <navigator url="/pages/chat/chat?errandId={{order.id}}&headPortrait={{order.headPortrait}}&publisherId={{order.publisherId}}"><image src="../../assets/tabarImages/liaotian.png"></image></navigator>
     </view>
   </view>
 </view>

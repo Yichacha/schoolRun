@@ -3,8 +3,8 @@
     "pages/index/index",
     "pages/message/message",
     "pages/chat/chat",
-    "pages/login/login",
     "pages/mine/mine",
+    "pages/login/login",
     "pages/issue/issue",
     "pages/serach/serach"
   ],

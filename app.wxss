@@ -1,6 +1,8 @@
 /**app.wxss**/
 @import "/templates/tabar/tabar.wxss";
-@import "/templates/noOrder/noOrder.wxss"
+@import "/templates/noOrder/noOrder.wxss";
+@import "/templates/loadingGif/loadingGif.wxss";
+@import "/templates/noMore/noMore.wxss";
 
 .container {
   height: 100%;

@@ -34,6 +34,8 @@
   </view>
   <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>
 </view>
+<include wx:if="{{showLoadingGif}}" src="/templates/loadingGif/loaddingGif.wxml"></include>
+<include wx:if="{{noMore}}" src="/templates/noMore/noMore.wxml"></include>
 <!-- tabar -->
 <import src="../../templates/tabar/tabar.wxml" />
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
