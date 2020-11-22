@@ -1,5 +1,5 @@
 import { getToken, setToken, removeToken } from '../../utils/cookies.js'
-import { getPrivateRecordApi, setHasReadApi, confirmReceiveApi, confirmIssueApi } from '../../api/api.js'
+import { getPrivateRecordApi, setHasReadApi, confirmReceiveApi, confirmIssueApi, getAccessApi } from '../../api/api.js'
 
 const app = getApp()
 
@@ -33,8 +33,9 @@ Page({
       toUserInfo: options,
       avatarUrl: app.globalData.userInfo.avatarUrl,
       ['options.fromUserId']: getToken(app.globalData.userId),
-      ['options.toUserId']: options.toUserId
+      ['options.toUserId']: options.toUserId || options.employerId
     })
+    console.log(this.data.options)
     this.getRecord()
   },
 
@@ -175,5 +176,9 @@ Page({
     }
     const res = await confirmReceiveApi(orderId, header)
     console.log('确认订单', res)
+  },
+  // 查看对方评价
+  getAccess() {
+
   }
 })

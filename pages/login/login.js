@@ -75,7 +75,7 @@ Page({
     })
   },
   updateCode: function() {
-    this.getCode({}, {}, 'arraybuffer')
+    this.getCode()
   },
   async getCode() {
     const res = await getCodeApi({}, {}, 'arraybuffer')
@@ -136,6 +136,9 @@ Page({
                   console.log('获取用户信息成功', res)
                   app.globalData.userInfo = res.userInfo
                   setToken(app.globalData.userToken, app.globalData.userInfo)
+                  wx.redirectTo({
+                    url: '../index/index'
+                  })
                   this.updateToken()
                 },
                 fail: function () {
@@ -166,9 +169,6 @@ Page({
         title: '登录成功~',
         icon: 'loading',
         duration: 2000
-      })
-      wx.redirectTo({
-        url: '../index/index'
       })
     } else {
       wx.showToast({

@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    timer: null,
     msgList: [],
     options: {
       page: 1,
@@ -24,11 +25,9 @@ Page({
       wx.redirectTo({
         url: '../login/login',
       })
-    }
-    // 实时获取最新记录
-    setInterval(() => {
+    } else {
       this.getMsgList()
-    }, 1000)
+    }
   },
 
   /**
@@ -42,7 +41,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getMsgList()
+    this.data.timer = setInterval(() => {
+      this.getMsgList()
+    }, 1000)
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   * 从列表页进入私聊页时会隐藏页面（不是卸载页面），清除计时器
+   */
+  onHide: function () {
+    clearInterval(this.data.timer)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    clearInterval(this.data.timer)
   },
 
   async getMsgList() {
