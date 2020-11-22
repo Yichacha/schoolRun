@@ -1,7 +1,7 @@
 <view class="mine">
   <view class="user-info">
-    <image src="/assets/images/avatar.jpg" class="user-avator"></image>
-    <view class="user-name">花花</view>
+    <image src="{{userAvator?userAvator:'/assets/images/avatar.jpg'}}" class="user-avator"></image>
+    <view class="user-name">{{userName?userName:'还没有名字'}}</view>
   </view>
   <view class="mine-order-info">
     <van-tabs active="{{ tabActive }}" bind:change="tagChange" color="#FCA44B">
@@ -21,16 +21,6 @@
       </van-tab>
       <van-tab title="评价 {{num}}">
         <view class="comment-list">
-          <!-- <view class="comment-item" wx:for="{{10}}" wx:key="index">
-            <view class="user">
-              <image src="/assets/images/avatar.jpg"></image>
-              <view class="user-name">我是ID我是ID</view>
-              <view class="comment-date">11.20</view>
-            </view>
-            <view class="comment-content">
-              评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容
-            </view>
-          </view> -->
           <comment-item wx:for="{{ commentContentList }}" comment="{{item}}" wx:key="index"></comment-item>
         </view>
       </van-tab>

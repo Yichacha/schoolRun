@@ -1,6 +1,8 @@
 .loadingGif{
   width: 100%;
   text-align: center;
+  padding: 15rpx;
+  box-sizing: border-box;
 }
 .loadingGif image{
   width: 50rpx;

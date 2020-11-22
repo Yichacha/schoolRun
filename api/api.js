@@ -14,3 +14,6 @@ export const getMsgListApi = (options, header) => getAction('/api/chatListElemen
 
 // 发布
 export const sendApi = (options, header) => postAction('/api/errand/save', options, header)
+
+export const sortByPriceApi = (options) => getAction('/api/errand/searchByPrice', options)
+

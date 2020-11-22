@@ -2,10 +2,15 @@ const app = getApp()
 var tabar = require('../../templates/tabar/tabar.js');
 import {
   getToken
-} from '../../utils/cookies.js'
+} from '../../utils/cookies.js';
+import {
+  getAction
+} from '../../api/requests.js'
 Page({
   data: {
-    tabActive: 2,
+    userAvator: '',
+    userName: '',
+    tabActive: 0,
     num: 5,
     statusShowInfo: false,
     toComent: false, // 是否评价
@@ -116,7 +121,8 @@ Page({
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 1, this) //1表示第二个tabbar
-    // this.checkUserLogin()
+    this.checkUserLogin()
+    this.getMyOrderList(0)
   },
   // 判断用户是否已登陆
   checkUserLogin() {
@@ -141,10 +147,38 @@ Page({
       })
       return
     }
+    console.log('userInfo', app.globalData.userInfo)
+    this.setData({
+      userAvator: app.globalData.userInfo.avatarUrl,
+      userName: app.globalData.userInfo.nickName
+    })
   },
   // 当tab切换的时候触发
   tagChange(e) {
     console.log(`切换到标签 ${e.detail.name}`)
+    switch(e.detail.name) {
+      case 0:
+        console.log('获取订单')
+        break
+      case 1:
+        console.log('获取接单')
+        break
+      case 2:
+        console.log('获取评价')
+        break
+      default: 
+      console.log('default')
+    }
+  },
+  // 获取订单列表
+  getMyOrderList(flag) {
+    getAction(`/api/order/getReceive/${flag}`).then( res => {
+      console.log('getMyOrderList', res.data)
+    })
+  },
+  // 获取接单列表
+  getTakeOrder() {
+
   },
   // 从组件传过来的方法，包含order对象
   showOrderInfo(e) {
