@@ -4,9 +4,9 @@
       <image src="{{order.headPortrait?order.headPortrait:'../../assets/tabarImages/niumang.png'}}"></image>
     </view>
     <text class="user-name">{{order.employerName}}</text>
-    <text class="user-createTime">{{order.createTime}}</text>
-    <view class="order-status unfinished" wx:if="{{order.status==0}}" bindtap="showOrderInfo">{{order.statusText}}</view>
-    <view class="order-status finished" wx:elif="{{order.status==1}}" bindtap="showOrderInfo">{{order.statusText}}</view>
+    <text class="user-createTime">{{createTime}}前</text>
+    <view class="order-status unfinished" wx:if="{{order.status==0}}" bindtap="showOrderInfo">未完成</view>
+    <view class="order-status finished" wx:elif="{{order.status==1}}" bindtap="showOrderInfo">已完成</view>
     <!-- <view class="order-status hide" wx:else>{{order.statusText}}</view> -->
   </view>
   <view class="order-info">

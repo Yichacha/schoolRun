@@ -5,16 +5,16 @@
   </view>
   <view class="mine-order-info">
     <van-tabs active="{{ tabActive }}" bind:change="tagChange" color="#FCA44B">
-      <van-tab title='订单 {{num}}'>
+      <van-tab title='订单 {{myOrderTotal}}'>
         <view class="my-order">
-          <view class="order-view" wx:for="{{orderList}}" wx:key="index">
+          <scroll-view  class="order-view" wx:for="{{myOrderList}}" wx:key="index">
             <order-item order="{{item}}" bind:showOrderInfo="showOrderInfo"></order-item>
-          </view>
+          </scroll-view>
         </view>
       </van-tab>
       <van-tab title="接单 {{num}}">
         <view class="my-order">
-          <view class="order-view" wx:for="{{orderList}}" wx:key="index">
+          <view class="order-view" wx:for="{{takeOrderTotal}}" wx:key="index">
             <order-item order="{{item}}" bind:showOrderInfo="showOrderInfo"></order-item>
           </view>
         </view>

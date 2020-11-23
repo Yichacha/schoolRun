@@ -9,7 +9,8 @@
         <van-overlay show="{{ show }}" bind:click="onClickHide">
           <view class="wrapper">
             <view class="sort-menu" catch:tap="noop">
-              <view class="sort-item" wx:for="{{sortRules}}" wx:for-item="item" wx:key="index" data-value="{{item.value}}" bind:tap="changeSortRule">
+              <view class="sort-item" wx:for="{{sortRules}}" wx:for-item="item" wx:key="index"
+                data-value="{{item.value}}" bind:tap="changeSortRule">
                 {{item.text}}
               </view>
             </view>
@@ -17,7 +18,8 @@
         </van-overlay>
       </van-col>
       <van-col span="16">
-        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach" bind:focus="toSearch" />
+        <van-search value="{{serachValue}}" placeholder="搜索地点" shape="round" class="home-serach"
+          bind:focus="toSearch" />
       </van-col>
       <van-col span="4">
         <navigator class="to-chat" url="/pages/message/message">
@@ -29,7 +31,10 @@
   <!-- 订单list -->
   <view class="home-orderList" wx:if="{{orderList.length!=0}}">
     <view class="order-view" wx:for="{{orderList}}" wx:key="index">
+      <van-swipe-cell right-width="{{ 65 }}">
       <order-item searchKey='{{serachValue}}' order='{{item}}'></order-item>
+        <view class="deleteBtn" slot="right"  bind:tap="deleteOrder">删除</view>
+      </van-swipe-cell>
     </view>
   </view>
   <include src="/templates/noOrder/noOrder.wxml" wx:if="{{orderList.length==0}}"></include>

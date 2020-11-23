@@ -86,3 +86,17 @@ page {
 .home .home-orderList .order-view {
   margin: 20rpx 0;
 }
+.home .home-orderList .order-view .van-swipe-cell .deleteBtn {
+  height: 100%;
+  width: 130rpx;
+  /*flex 布局*/
+  display: flex;
+  /*实现垂直居中*/
+  align-items: center;
+  /*实现水平居中*/
+  justify-content: center;
+  vertical-align: middle;
+  background-color: #ee0a24 !important;
+  color: white;
+  font-size: 28rpx;
+}

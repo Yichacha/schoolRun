@@ -1,8 +1,9 @@
-page{
+page {
     background-color: #f5f5f5;
     padding-bottom: 120rpx;
     box-sizing: border-box;
 }
+
 .home {
     width: 100%;
 
@@ -41,7 +42,9 @@ page{
                     box-sizing: border-box;
                     border-radius: 10rpx;
                     box-shadow: #ccc 0px 0px 1px;
-                    ::before,::after{
+
+                    ::before,
+                    ::after {
                         border: solid transparent;
                         content: ' ';
                         height: 0;
@@ -50,16 +53,19 @@ page{
                         width: 0;
                         left: 10px;
                     }
-                    ::before{
+
+                    ::before {
                         border-width: 10px;
                         border-bottom-color: #fcfcfc;
                         top: -42rpx;
                     }
-                    ::after{
+
+                    ::after {
                         border-width: 10px;
                         border-bottom-color: #fff;
                         top: -41rpx;
                     }
+
                     .sort-item {
                         background-color: rgba(256, 256, 256, 1);
                         color: #666666;
@@ -69,7 +75,8 @@ page{
                         letter-spacing: 5rpx;
                         padding: 0 28rpx;
                         box-sizing: border-box;
-                        &:hover{
+
+                        &:hover {
                             background-color: #f3f3f3;
                         }
                     }
@@ -79,21 +86,41 @@ page{
             .van-search {
                 width: 550rpx;
             }
-            .to-chat{
+
+            .to-chat {
                 width: 70%;
                 height: 70%;
                 text-align: center;
                 padding: 12rpx;
                 box-sizing: border-box;
-                
+
             }
         }
     }
-    .home-orderList{
+
+    .home-orderList {
         position: relative;
         top: 100rpx;
-       .order-view{
+
+        .order-view {
             margin: 20rpx 0;
+
+            .van-swipe-cell {
+                .deleteBtn {
+                    height: 100%;
+                    width: 130rpx;
+                    /*flex 布局*/
+                    display: flex;
+                    /*实现垂直居中*/
+                    align-items: center;
+                    /*实现水平居中*/
+                    justify-content: center;
+                    vertical-align: middle;
+                    background-color: #ee0a24 !important;
+                    color: white;
+                    font-size: 28rpx;
+                }
+            }
         }
     }
 }

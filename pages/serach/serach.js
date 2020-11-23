@@ -35,6 +35,8 @@ Page({
       searchHistory.unshift(this.data.searchValue)
       wx.setStorageSync('searchHistory', searchHistory)
     }
+    app.globalData.serachKey = this.data.searchValue
+    console.log('app.globalData.serachKey', app.globalData.serachKey)
     // 导航至首页
     wx.reLaunch({
       url: '/pages/index/index',

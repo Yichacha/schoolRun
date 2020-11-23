@@ -68,14 +68,10 @@
 }
 .order-item .order-request {
   display: flex;
-  white-space: nowrap;
   font-size: 28rpx;
 }
 .order-item .order-request .order-route {
   flex: 8;
-  text-overflow: -o-ellipsis-lastline;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .order-item .order-request .order-route .jiantou {
   width: 70rpx;

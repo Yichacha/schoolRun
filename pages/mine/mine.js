@@ -15,88 +15,14 @@ Page({
     statusShowInfo: false,
     toComent: false, // 是否评价
     commentContent: '', //评价的内容
-    orderList: [{
-        userName: '花花',
-        createTime: '3分钟前',
-        orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
-        address1: '六饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '5',
-        status: 0, // 0订单未完成 1订单已完成
-        statusText: '未完成'
-      }, {
-        userName: '小黄',
-        createTime: '5分钟前',
-        orderContent: '我不吃肉',
-        address1: '三饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '4',
-        status: 1, // 0订单未完成 1订单已完成
-        statusText: '已完成'
-      }, {
-        userName: '花花',
-        createTime: '3分钟前',
-        orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
-        address1: '六饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '5',
-        status: 0, // 0订单未完成 1订单已完成
-        statusText: '未完成'
-      }, {
-        userName: '花花',
-        createTime: '3分钟前',
-        orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
-        address1: '六饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '5',
-        status: 0, // 0订单未完成 1订单已完成
-        statusText: '未完成'
-      },
-      {
-        userName: '小黄',
-        createTime: '5分钟前',
-        orderContent: '我不吃肉',
-        address1: '三饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '4',
-        status: 1, // 0订单未完成 1订单已完成
-        statusText: '已完成'
-      }, {
-        userName: '小黄',
-        createTime: '5分钟前',
-        orderContent: '我不吃肉',
-        address1: '三饭',
-        address2: '东十三',
-        time1: '23:20',
-        time2: '23:40',
-        money: '4',
-        status: 1, // 0订单未完成 1订单已完成
-        statusText: '已完成'
-      },
-    ],
+    // orderList: [],
+    size: 12,
+    myOrderList:[], // 我发布的跑腿
+    myOrderTotal: 0,
+    takeOrderList: [], // 我接的订单
+    takeOrderTotal: 0,
     // 点击查看的订单
-    chosedOrder: {
-      // userName: '花花',
-      // createTime: '3分钟前',
-      // orderContent: '球带一份鸡肉卷球带一份鸡肉卷球带一份鸡肉卷',
-      // address1: '六饭',
-      // address2: '东十三',
-      // time1: '23:20',
-      // time2: '23:40',
-      // money: '5',
-      // status: null, // 0订单未完成 1订单已完成
-      // statusText: '未完成'
-    },
+    chosedOrder: {},
     commentContentList: [{
       userName: '花小花',
       avator: '/assets/images/avatar.jpg',
@@ -121,8 +47,9 @@ Page({
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 1, this) //1表示第二个tabbar
+    // this.getOrderList() 
     this.checkUserLogin()
-    this.getMyOrderList(0)
+    this.getMyOrderList()
   },
   // 判断用户是否已登陆
   checkUserLogin() {
@@ -147,21 +74,22 @@ Page({
       })
       return
     }
-    console.log('userInfo', app.globalData.userInfo)
-    this.setData({
-      userAvator: app.globalData.userInfo.avatarUrl,
-      userName: app.globalData.userInfo.nickName
-    })
+    if (app.globalData.userInfo){
+      this.setData({
+        userAvator: app.globalData.userInfo.avatarUrl,
+        userName: app.globalData.userInfo.nickName
+      })
+    }
   },
   // 当tab切换的时候触发
   tagChange(e) {
-    console.log(`切换到标签 ${e.detail.name}`)
     switch(e.detail.name) {
       case 0:
-        console.log('获取订单')
+        this.getMyOrderList()
         break
       case 1:
         console.log('获取接单')
+        this.getTakeOrder()
         break
       case 2:
         console.log('获取评价')
@@ -170,15 +98,67 @@ Page({
       console.log('default')
     }
   },
+  // 下拉加载更多跑腿
+  onReachBottom() {
+      this.data.size += 6
+      // 根据排序方式的不同，按照不同房时加载数据
+      switch (this.data.tabActive) {
+        case "1":
+          // this.getMyOrderList(0)
+          break
+        case "2":
+          console.log('获取评论列表')
+          break
+        default:
+          this.getMyOrderList()
+      }
+      this.setData({
+        showLoadingGif: false
+      })
+  },
   // 获取订单列表
-  getMyOrderList(flag) {
-    getAction(`/api/order/getReceive/${flag}`).then( res => {
-      console.log('getMyOrderList', res.data)
+  getMyOrderList() {
+    getAction('/api/errand/getMyAll',{
+      page: 1,
+      size: this.data.size,
+    }).then( res => {
+      this.setData({
+        myOrderList: res.data.data.list,
+        myOrderTotal: res.data.data.totalCount
+      })
+      console.log(this.data.myOrderList)
     })
   },
   // 获取接单列表
   getTakeOrder() {
-
+    getAction('/api/order/getReceive', {
+      size: this.data.size,
+      page: 1,
+      flag: 0
+    }).then( res => {
+      this.setData({
+        takeOrderList: res.data.orderList.list,
+        takeOrderTotal: res.data.orderList.totalCount
+      })
+      console.log('我接的单', res.data)
+    })
+  },
+  getOrderList() {
+    return getAction('/api/errand/show', {
+      page: 1,
+      size: this.data.size,
+      content: ''
+    }).then(res => {
+      console.log(res)
+      if (res.data.code === 1) {
+        this.setData({
+          orderList: res.data.data.list,
+          total: res.data.data.totalCount
+        })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   },
   // 从组件传过来的方法，包含order对象
   showOrderInfo(e) {
