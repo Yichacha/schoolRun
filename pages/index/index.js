@@ -121,7 +121,7 @@ Page({
     switch (e.target.dataset.value) {
       case "1":
         this.setData({
-          sortWay: "2",
+          sortWay: "1",
           size: 12,
           total: 0,
           serachValue: ''
@@ -130,7 +130,7 @@ Page({
         break
       case "2":
         this.setData({
-          sortWay: "3",
+          sortWay: "2",
           size: 12,
           total: 0,
         })
