@@ -179,14 +179,13 @@
   color:  #FFA851;
   font: 28rpx PingFangSC-Regular;
 }
-
-.chat .order_container .order .order_content .radio {
+.chat .order_container .order .order_content .order_item {
+  border-bottom: 1rpx solid #CCCCCC;
+}
+.chat .order_container .order .order_content .order_item .radio {
   position: absolute;
   right: 0;
   width: 44rpx;
-}
-.chat .order_container .order .order_content order-item {
-  border-bottom: 1rpx solid #CCCCCC;
 }
 .chat .order_container .order .confirm_container .confirmBtn {
   width: 420rpx;

@@ -4,7 +4,7 @@ import {
   setHasReadApi,
   confirmReceiveApi,
   confirmIssueApi,
-  getAccessApi,
+  getOrderApi,
   getCommentApi
 } from '../../api/api.js'
 
@@ -16,8 +16,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bindAvatar: true, // 点击头像
-    bindComment: true, // 点击查看评价
+    bindAvatar: false, // 点击头像
+    bindComment: false, // 点击查看评价
     acceptOrder: false, // 确认订单弹窗
     hasRead: false, // 消息未读时头像有红点提示
     options: {
@@ -26,11 +26,14 @@ Page({
       size: 10,
       toUserId: ''
     },
-    avatarUrl: '', // 我的头像
+    myAvatarUrl: '', // 我的头像
     toUserInfo: {}, // 对方信息
-    msgList: [], // 聊天消息
-    commentList: [], // 用户评价
-    value: '' // 发送框的内容
+    msgList: [],
+    orderList: [],
+    commentList: [],
+    errandId: 0, // 选中的订单 id
+    value: '', // 发送框的内容
+    header: {}
   },
 
   /**
@@ -39,8 +42,12 @@ Page({
   onLoad: function (options) {
     console.log('路由携带的用户信息', options)
     this.setData({
+      header: {
+        'Authorization': getToken(app.globalData.token),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       toUserInfo: options,
-      avatarUrl: app.globalData.userInfo.avatarUrl,
+      myAvatarUrl: app.globalData.userInfo.avatarUrl,
       ['options.fromUserId']: getToken(app.globalData.userId),
       ['options.toUserId']: options.toUserId || options.employerId
     })
@@ -97,11 +104,7 @@ Page({
     this.setData({
       acceptOrder: false
     })
-    let header = {
-      'Authorization': getToken(app.globalData.token),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-    const { data: res } = await confirmReceiveApi(errandId, header)
+    const { data: res } = await confirmReceiveApi(errandId, this.data.header)
     if(res.code === 1) {
       console.log('确认接单', res)
     }
@@ -116,6 +119,10 @@ Page({
     this.setData({
       editBottom:  0
     })
+  },
+  checkeOrder(e) {
+    this.data.errandId = e.detail.value
+    console.log('选中订单', e.detail.value)
   },
   // 监听输入
   getInput(e) {
@@ -143,6 +150,7 @@ Page({
       console.log('获取聊天记录失败')
     }
   },
+  // 将聊天记录标记已读
   async readRecord() {
     let header = {
       'Authorization': getToken(app.globalData.token)
@@ -201,29 +209,45 @@ Page({
   },
   fetchMoreRecords() {
     this.data.options.size = this.data.msgList.length + 10
-    console.log(this.data.options)
     this.getRecord(true)
   },
   // 获取对方的未接订单
-  getOrder() {
-    this.setData({
-      bindAvatar: true
-    })
+  async getOrder() {
+    const { data: res } = await getOrderApi({ userId: this.data.options.toUserId }, this.data.header)
+    res.data.map(item => item.status = 3)
+    if(res.code === 1) {
+      console.log('获取订单列表', res)
+      this.setData({
+        orderList: res.data,
+        bindAvatar: true
+      })
+    }
+  },
+  // 确认接单
+  async confirmReceive() {
+    const { data: res } = await confirmReceiveApi({ errandId: this.data.errandId }, this.data.header)
+    if(res.code === 1) {
+      console.log('接单成功', res)
+      this.setData({
+        bindAvatar: false
+      })
+    }
   },
   // 获取对方的评价
   async getComment() {
     this.setData({
       bindComment: true
     })
-    let header = {
-      'Authorization': getToken(app.globalData.token),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-    const { data: res } = await getCommentApi({employeeId: this.data.options.fromUserId}, header)
+    const { data: res } = await getCommentApi({employeeId: this.data.options.toUserId}, this.data.header)
     if(res.code === 1) {
       console.log('获取用户评价', res)
       this.setData({
         commentList: res.data
+      })
+    } else {
+      wx.showToast({
+        title: '获取评价失败',
+        duration: 2000
       })
     }
   }

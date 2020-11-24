@@ -8,9 +8,9 @@ export const loginApi = (options, header) => postAction('/login/wxMiniProGramLog
 // 私聊
 export const getPrivateRecordApi = (options, header) => postAction('/api/chatRecord/obtainRecordsPageByOppositeUserId', options, header)
 export const setHasReadApi = (options, header) => postAction('/api/chatRecord/setHasReadByRecordId', options, header)
-export const confirmReceiveApi = (options, header) => postAction('/provider/order/save', options, header)
-export const confirmIssueApi = (options, header) => putAction('/provider/order/confirm/{orderId}', options, header)
-export const getAccessApi = (options, header) => getAction('', options, header)
+export const confirmReceiveApi = (options, header) => postAction('/api/order/save', options, header)
+export const confirmIssueApi = (orderId, header) => putAction(`/provider/order/confirm/${orderId}`, {}, header)
+export const getOrderApi = (options, header) => getAction('/api/errand/getUserUnOrder', options, header)
 export const getCommentApi = ( options, header) => postAction('/api/comment/getCommentsByEmployeeId',  options, header)
 
 // 消息列表

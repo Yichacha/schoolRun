@@ -23,7 +23,7 @@
               </view>
             </view>
             <view class="triangle"></view>
-            <image class="avatar" src="{{ avatarUrl }}"></image>
+            <image class="avatar" src="{{ myAvatarUrl }}"></image>
           </view>
         </view>
       </scroll-view>
@@ -42,21 +42,16 @@
         <text class="check_comment" bindtap="getComment">查看评价</text>
       </view>
       <scroll-view class="order_content" scroll-y="true">
-        <order-item order='{{item}}'>
-          <radio value="r1" class="radio"></radio>
-        </order-item>
-        <order-item order='{{item}}'>
-          <radio value="r1" class="radio"></radio>
-        </order-item>
-        <order-item order='{{item}}'>
-          <radio value="r1" class="radio"></radio>
-        </order-item>
-        <order-item order='{{item}}'>
-          <radio value="r1" class="radio"></radio>
-        </order-item>
+        <radio-group bindchange="checkeOrder">
+          <label class="order_item" wx:for="{{ orderList }}" wx:key="index">
+            <order-item order="{{ item }}">
+              <radio value="{{ item.id }}" class="radio"></radio>
+            </order-item>
+          </label>
+        </radio-group>
       </scroll-view>
       <view class="confirm_container">
-        <button bindtap="confirm" class="confirmBtn">确认接单</button>
+        <button bindtap="confirmReceive" class="confirmBtn">确认接单</button>
       </view>
     </view>
   </view>
