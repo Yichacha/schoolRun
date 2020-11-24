@@ -82,7 +82,8 @@ Page({
     }
   },
   enterChat: function(e) {
-    const data = e.currentTarget.dataset.msglist
+    // e.currentTarget.dataset. 获取标签存储的值 data-xxx
+    const data = this.data.msgList[e.currentTarget.dataset.index]
     wx.navigateTo({
       url: '/pages/chat/chat?&headPortrait=' + data.headPortrait + '&toUserId=' + data.toUserId
     })

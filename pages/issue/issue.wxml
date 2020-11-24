@@ -8,7 +8,7 @@
       <text>预期费用</text>
       <view class="fee">
         <image src="../../assets/images/money.png"></image>
-        <input class="fee_time" maxlength="2" bindinput="feeBlur"></input>
+        <input class="fee_time" maxlength="3" bindinput="feeBlur"></input>
       </view>
     </view>
     <view class="time_input">
@@ -21,11 +21,11 @@
     </view>
     <view class="origin_input">
       <text>起点</text>
-      <input bindinput="originBlur"></input>
+      <input bindinput="originBlur" maxlength="5"></input>
     </view>
     <view class="detination_input">
       <text>终点</text>
-      <input bindinput="detinationBlur"></input>
+      <input bindinput="detinationBlur" maxlength="5"></input>
     </view>
     <button bindtap="send">发送</button>
   </view>

@@ -1,7 +1,7 @@
 <view class="message">
   <card
     wx:for="{{msgList}}"
-    data-msglist="{{item}}"
+    data-index="{{index}}"
     wx:key="index"
     msgList="{{item}}"
     bindtap="enterChat"

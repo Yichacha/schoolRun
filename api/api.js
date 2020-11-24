@@ -1,4 +1,4 @@
-import { postAction, getAction } from './requests.js'
+import { postAction, getAction, putAction } from './requests.js'
 
 // 登录
 export const jxfwLoginApi = (options, header) => postAction('https://jxfw.gdut.edu.cn/new/login', options, header)
@@ -8,6 +8,10 @@ export const loginApi = (options, header) => postAction('/login/wxMiniProGramLog
 // 私聊
 export const getPrivateRecordApi = (options, header) => postAction('/api/chatRecord/obtainRecordsPageByOppositeUserId', options, header)
 export const setHasReadApi = (options, header) => postAction('/api/chatRecord/setHasReadByRecordId', options, header)
+export const confirmReceiveApi = (options, header) => postAction('/provider/order/save', options, header)
+export const confirmIssueApi = (options, header) => putAction('/provider/order/confirm/{orderId}', options, header)
+export const getAccessApi = (options, header) => getAction('', options, header)
+export const getCommentApi = ( options, header) => postAction('/api/comment/getCommentsByEmployeeId',  options, header)
 
 // 消息列表
 export const getMsgListApi = (options, header) => getAction('/api/chatListElement/getChatList', options, header)
