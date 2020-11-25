@@ -4,7 +4,8 @@ import {
   getToken
 } from '../../utils/cookies.js';
 import {
-  getAction
+  getAction,
+  postAction
 } from '../../api/requests.js'
 Page({
   data: {
@@ -21,35 +22,35 @@ Page({
     myOrderTotal: 0,
     takeOrderList: [], // 我接的订单
     takeOrderTotal: 0,
-    // 点击查看的订单
-    chosedOrder: {},
-    commentContentList: [{
-      userName: '花小花',
-      avator: '/assets/images/avatar.jpg',
-      createDate: '11.20',
-      comment: '服务周到哈哈哈哈哈哈哈哈哈'
-    }, {
-      userName: '花大花',
-      avator: '/assets/images/avatar.jpg',
-      createDate: '11.20',
-      comment: '红红火火恍恍惚惚人生自古谁无死'
-    },{
-      userName: '黄小黄',
-      avator: '/assets/tabarImages/niumang.png',
-      createDate: '12.01',
-      comment: '夜空中最亮的星'
-    },{
-      userName: '黄大黄',
-      avator: '/assets/images/avatar.jpg',
-      createDate: '12.20',
-      comment: '春眠不觉晓处处闻啼鸟夜来风雨声花落知多少春眠不觉晓处处闻啼鸟夜来风雨声花落知多少'
-    }]
+    chosedOrder: {},// 点击查看的订单
+    commentContentList: [],
+    // [{
+    //   userName: '花小花',
+    //   avator: '/assets/images/avatar.jpg',
+    //   createDate: '11.20',
+    //   comment: '服务周到哈哈哈哈哈哈哈哈哈'
+    // }, {
+    //   userName: '花大花',
+    //   avator: '/assets/images/avatar.jpg',
+    //   createDate: '11.20',
+    //   comment: '红红火火恍恍惚惚人生自古谁无死'
+    // },{
+    //   userName: '黄小黄',
+    //   avator: '/assets/tabarImages/niumang.png',
+    //   createDate: '12.01',
+    //   comment: '夜空中最亮的星'
+    // },{
+    //   userName: '黄大黄',
+    //   avator: '/assets/images/avatar.jpg',
+    //   createDate: '12.20',
+    //   comment: '春眠不觉晓处处闻啼鸟夜来风雨声花落知多少春眠不觉晓处处闻啼鸟夜来风雨声花落知多少'
+    // }]
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 1, this) //1表示第二个tabbar
-    // this.getOrderList() 
     this.checkUserLogin()
     this.getMyOrderList()
+    this.getTakeOrder()
   },
   // 判断用户是否已登陆
   checkUserLogin() {
@@ -84,37 +85,33 @@ Page({
   // 当tab切换的时候触发
   tagChange(e) {
     switch(e.detail.name) {
-      case 0:
-        this.getMyOrderList()
-        break
       case 1:
         console.log('获取接单')
         this.getTakeOrder()
         break
       case 2:
         console.log('获取评价')
+        this.getCommentList()
         break
       default: 
       console.log('default')
     }
   },
-  // 下拉加载更多跑腿
+  // 下拉加载更多信息
   onReachBottom() {
-      this.data.size += 6
+      this.data.size += 12
       // 根据排序方式的不同，按照不同房时加载数据
       switch (this.data.tabActive) {
         case "1":
-          // this.getMyOrderList(0)
+          this.getTakeOrder()
           break
         case "2":
           console.log('获取评论列表')
+          // this.getCommentList()
           break
         default:
           this.getMyOrderList()
       }
-      this.setData({
-        showLoadingGif: false
-      })
   },
   // 获取订单列表
   getMyOrderList() {
@@ -143,21 +140,12 @@ Page({
       console.log('我接的单', res.data)
     })
   },
-  getOrderList() {
-    return getAction('/api/errand/show', {
-      page: 1,
-      size: this.data.size,
-      content: ''
-    }).then(res => {
-      console.log(res)
-      if (res.data.code === 1) {
-        this.setData({
-          orderList: res.data.data.list,
-          total: res.data.data.totalCount
-        })
-      }
-    }).catch(err => {
-      console.log(err)
+  // 获取评论列表
+  getCommentList() {
+    postAction('/api/comment/getCommentsByEmployeeId',{
+      employeeId: app.globalData.userId
+    }).then( res => {
+      console.log('获取评论列表', res.data)
     })
   },
   // 从组件传过来的方法，包含order对象
@@ -191,7 +179,14 @@ Page({
   // 发表评价
   toComment() {
     if (this.data.commentContent) {
-      console.log(this.data.commentContent)
+      console.log('评论内容', this.data.commentContent)
+      console.log('被选择的订单id', this.data.chosedOrder.id)
+      postAction('/api/comment/save', {
+        orderId: this.data.chosedOrder.id,
+        content: this.data.commentContent
+      }).then( res => {
+        console.log('我对订单发表了评论', res.data)
+      })
       wx.showToast({
         title: '评价成功！',
       })

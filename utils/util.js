@@ -38,30 +38,30 @@ const renderTime = date => {
 
 // 求时间差
 const timeDif = time => {
-  var date1=new Date();  //开始时间
-  var date2=new Date(time);    //结束时间
-  var date3=date2.getTime()-date1.getTime()  //时间差的毫秒数
-  //计算出相差天数
-  var days=Math.floor(date3/(24*3600*1000))
-  //计算出小时数
-  var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
-  var hours=Math.floor(leave1/(3600*1000))
-  //计算相差分钟数
-  var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
-  var minutes=Math.floor(leave2/(60*1000))
-  //计算相差秒数
-  var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
-  var seconds=Math.round(leave3/1000)
-  // return (days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
-  if(-(days+1)>0){
-    return -(days)+"天"
-  }else if(-(hours+1)>0){
-    return -(hours+1)+"小时"
-  }else if(minutes){
-    return -minutes+"分钟"
-  }else {
-    return seconds + "秒"
-  }
+var date1=new Date();  //开始时间
+var date2=new Date(time);    //结束时间
+var date3=date2.getTime()-date1.getTime()  //时间差的毫秒数
+//计算出相差天数
+var days=Math.floor(date3/(24*3600*1000))
+//计算出小时数
+var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+var hours=Math.floor(leave1/(3600*1000))
+//计算相差分钟数
+var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+var minutes=Math.floor(leave2/(60*1000))
+//计算相差秒数
+// var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+// var seconds=Math.round(leave3/1000)
+// return (days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+if(-(days+1)>0){
+  return -(days)+"天前"
+}else if(-(hours+1)>0){
+  return -(hours+1)+"小时前"
+}else if(minutes){
+  return -minutes+"分钟前"
+}else {
+  return  "刚刚"
+}
 }
 const timeChangeover = (updateTime) => {
   const minute = 1000 * 60;
@@ -85,7 +85,7 @@ const timeChangeover = (updateTime) => {
     return "" + parseInt(dayC) + "天前"
   } else if (hourC >= 1) {
     return "" + parseInt(hourC) + "小时前"
-  } else if (minC >= 1) {
+  } else if (minC > 1) {
     return "" + parseInt(minC) + "分钟前"
   } else {
     return "刚刚"

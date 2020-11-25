@@ -12,9 +12,9 @@
           </scroll-view>
         </view>
       </van-tab>
-      <van-tab title="接单 {{num}}">
+      <van-tab title="接单 {{takeOrderTotal}}">
         <view class="my-order">
-          <view class="order-view" wx:for="{{takeOrderTotal}}" wx:key="index">
+          <view class="order-view" wx:for="{{takeOrderList}}" wx:key="index">
             <order-item order="{{item}}" bind:showOrderInfo="showOrderInfo"></order-item>
           </view>
         </view>

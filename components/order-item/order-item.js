@@ -1,7 +1,8 @@
 import {
   formatTimeTwo,
   renderTime,
-  timeDif
+  timeDif,
+  timeChangeover
 } from '../../utils/util.js'
 Component({
 
@@ -39,11 +40,6 @@ Component({
     time1: '',
     time2: '',
     createTime: '',
-    // statusList: [
-    //   { id: 0, name: "未完成" },
-    //   { id: 1, name: "已完成" }
-    // ],
-    // statusMap: {},
   },
   /**
    * 组件的方法列表
@@ -55,20 +51,20 @@ Component({
         let address2 = this.getHilightStrArray(order.destination, this.data.searchKey)
         let time1 = renderTime(order.expectStartTime, 'M-D h:m')
         let time2 = renderTime(order.expectEndTime, 'M-D h:m')
-        // let time3 = renderTime(order.createTime, 'h:m')
+        const time3 = timeChangeover(order.createTime)
         this.setData({
           address1: address1,
           address2: address2,
           time1: time1,
           time2: time2,
-          // createTime: time3
+          createTime: time3
         })
       } else {
         let address1 = order.startingPoint
         let address2 = order.destination
         let time1 = formatTimeTwo(order.expectStartTime, 'M-D h:m')
         let time2 = formatTimeTwo(order.expectEndTime, 'M-D h:m')
-        const time3 = timeDif(order.createTime)
+        const time3 = timeChangeover(order.createTime)
         this.setData({
           address1: address1,
           address2: address2,

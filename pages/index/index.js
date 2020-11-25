@@ -40,6 +40,8 @@ Page({
   },
   onLoad: function () {
     tabar.tabbar("tabBar", 0, this) //0表示第一个tabbar
+  },
+  onShow() {
     this.getOrderList()
   },
   // 显示遮罩层
@@ -114,21 +116,31 @@ Page({
     this.setData({
       show: false,
       initIcon: true,
-      serachValue: ''
+      // serachValue: ''
     })
-    app.globalData.serachKey = ''
+    // app.globalData.serachKey = ''
     // 点击的排序方式索引
     switch (e.target.dataset.value) {
+      case "0":
+        this.setData({
+          sortWay: "0",
+          size: 12,
+          total: 0,
+        })
+        this.getOrderList()
+        console.log('时间排序')
+        break
       case "1":
+        console.log('升序')
         this.setData({
           sortWay: "1",
           size: 12,
           total: 0,
-          serachValue: ''
         })
         this.sortByPrice(0)
         break
       case "2":
+        console.log('现在搜索的关键字', this.data.serachValue)
         this.setData({
           sortWay: "2",
           size: 12,
