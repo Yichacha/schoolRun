@@ -41,9 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.data.timer = setInterval(() => {
-      this.getMsgList()
-    }, 1000)
+    this.getMsgList()
   },
 
   /**
@@ -63,7 +61,6 @@ Page({
 
   async getMsgList() {
     let header = {
-      'Authorization': getToken(app.globalData.token),
       'Content-Type': 'application/x-www-form-urlencoded'
     }
     const res = await getMsgListApi(this.data.options, header)

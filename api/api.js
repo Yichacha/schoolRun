@@ -1,4 +1,4 @@
-import { postAction, getAction, putAction } from './requests.js'
+import { postAction, getAction, putAction, deleteAction } from './requests.js'
 
 // 登录
 export const jxfwLoginApi = (options, header) => postAction('https://jxfw.gdut.edu.cn/new/login', options, header)
@@ -6,12 +6,14 @@ export const getCodeApi = (options, header, responseType) => getAction('https://
 export const loginApi = (options, header) => postAction('/login/wxMiniProGramLogin', options)
 
 // 私聊
-export const getPrivateRecordApi = (options, header) => postAction('/api/chatRecord/obtainRecordsPageByOppositeUserId', options, header)
-export const setHasReadApi = (options, header) => postAction('/api/chatRecord/setHasReadByRecordId', options, header)
+export const getPrivateRecordApi = (options) => postAction('/api/chatRecord/obtainRecordsPageByOppositeUserId', options)
+export const setHasReadApi = (options) => postAction('/api/chatRecord/setHasReadByRecordId', options)
 export const confirmReceiveApi = (options, header) => postAction('/api/order/save', options, header)
-export const confirmIssueApi = (orderId, header) => putAction(`/provider/order/confirm/${orderId}`, {}, header)
+export const confirmOrderApi = (orderId, header) => putAction(`/api/order/confirm/${orderId}`, {}, header)
+export const cancelOrderApi = (orderId, header) => deleteAction(`/api/order/delete/${orderId}`, header)
 export const getOrderApi = (options, header) => getAction('/api/errand/getUserUnOrder', options, header)
-export const getCommentApi = ( options, header) => postAction('/api/comment/getCommentsByEmployeeId',  options, header)
+export const getCommentApi = (options, header) => getAction('/api/comment/getCommentsByEmployeeId',  options, header)
+export const getReceivedOrderApi = (employeeId, header) => getAction(`/api/order/getWeOrder/${employeeId}`, header)
 
 // 消息列表
 export const getMsgListApi = (options, header) => getAction('/api/chatListElement/getChatList', options, header)

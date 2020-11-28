@@ -3,9 +3,11 @@ import {
   getPrivateRecordApi,
   setHasReadApi,
   confirmReceiveApi,
-  confirmIssueApi,
+  confirmOrderApi,
+  cancelOrderApi,
   getOrderApi,
-  getCommentApi
+  getCommentApi,
+  getReceivedOrderApi
 } from '../../api/api.js'
 
 const app = getApp()
@@ -18,7 +20,7 @@ Page({
   data: {
     bindAvatar: false, // 点击头像
     bindComment: false, // 点击查看评价
-    acceptOrder: false, // 确认订单弹窗
+    showComment: false,
     hasRead: false, // 消息未读时头像有红点提示
     options: {
       fromUserId: '',
@@ -43,7 +45,6 @@ Page({
     console.log('路由携带的用户信息', options)
     this.setData({
       header: {
-        'Authorization': getToken(app.globalData.token),
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       toUserInfo: options,
@@ -91,22 +92,9 @@ Page({
       })
     } else {
       this.setData({
-        bindAvatar: false
+        bindAvatar: false,
+        showComment: false
       })
-    }
-  },
-  handle_cancel() {
-    this.setData({
-      acceptOrder: false
-    })
-  },
-  async handle_confirm() {
-    this.setData({
-      acceptOrder: false
-    })
-    const { data: res } = await confirmReceiveApi(errandId, this.data.header)
-    if(res.code === 1) {
-      console.log('确认接单', res)
     }
   },
   editFocus(e) {
@@ -131,10 +119,7 @@ Page({
     })
   },
   async getRecord(getMore = false) {
-    let header = {
-      'Authorization': getToken(app.globalData.token)
-    }
-    const { data: res } = await getPrivateRecordApi(this.data.options, header)
+    const { data: res } = await getPrivateRecordApi(this.data.options)
     if(res.code === 1) {
       if(getMore) { // 加载更多消息
         this.setData({
@@ -152,10 +137,7 @@ Page({
   },
   // 将聊天记录标记已读
   async readRecord() {
-    let header = {
-      'Authorization': getToken(app.globalData.token)
-    }
-    const { data: res } = await setHasReadApi(this.data.options, header)
+    const { data: res } = await setHasReadApi(this.data.options)
     if(res.code === 1) {
       this.setData({
         hasRead: true
@@ -211,14 +193,28 @@ Page({
     this.data.options.size = this.data.msgList.length + 10
     this.getRecord(true)
   },
-  // 获取对方的未接订单
+  // 获取发布者的未接订单
   async getOrder() {
     const { data: res } = await getOrderApi({ userId: this.data.options.toUserId }, this.data.header)
-    res.data.map(item => item.status = 3)
+    res.data.map(item => item.status = -1)
+    if(res.code === 1) {
+      console.log('获取跑腿列表', res)
+      this.setData({
+        orderList: res.data,
+        bindAvatar: true,
+        showComment: true
+      })
+    }
+  },
+  // 获取跑腿者已接单的订单
+  async getReceivedOrder() {
+    const { data: res } = await getReceivedOrderApi(this.data.options.toUserId, this.data.header)
+    res.orderList.map(item => item.status = -1)
+    console.log(res)
     if(res.code === 1) {
       console.log('获取订单列表', res)
       this.setData({
-        orderList: res.data,
+        orderList: res.orderList,
         bindAvatar: true
       })
     }
@@ -227,7 +223,27 @@ Page({
   async confirmReceive() {
     const { data: res } = await confirmReceiveApi({ errandId: this.data.errandId }, this.data.header)
     if(res.code === 1) {
-      console.log('接单成功', res)
+      console.log('确认接单', res)
+      this.setData({
+        bindAvatar: false
+      })
+    }
+  },
+  // 确认订单
+  async confirmOrder() {
+    const { data: res } = await confirmOrderApi(this.data.errandId, this.data.header)
+    if(res.code === 1) {
+      console.log('确认订单', res)
+      this.setData({
+        bindAvatar: false
+      })
+    }
+  },
+  // 取消订单
+  async cancelOrder() {
+    const { data: res } = await cancelOrderApi(this.data.errandId, this.data.header)
+    if(res.code === 1) {
+      console.log('取消跑腿', res)
       this.setData({
         bindAvatar: false
       })
@@ -238,15 +254,20 @@ Page({
     this.setData({
       bindComment: true
     })
-    const { data: res } = await getCommentApi({employeeId: this.data.options.toUserId}, this.data.header)
+    const { data: res } = await getCommentApi({
+      employeeId: this.data.options.toUserId,
+      page: 1,
+      size: 10
+    }, this.data.header)
     if(res.code === 1) {
       console.log('获取用户评价', res)
       this.setData({
-        commentList: res.data
+        commentList: res.data.list
       })
     } else {
       wx.showToast({
         title: '获取评价失败',
+        icon: 'none',
         duration: 2000
       })
     }

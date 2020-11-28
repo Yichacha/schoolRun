@@ -5,6 +5,7 @@
     </view>
     <text class="user-name">{{order.employerName}}</text>
     <text class="user-createTime">{{createTime}}</text>
+    <slot></slot>
     <view class="order-status unfinished" wx:if="{{order.status==0}}" bindtap="showOrderInfo">未完成</view>
     <view class="order-status finished" wx:elif="{{order.status==1}}" bindtap="showOrderInfo">已完成</view>
     <!-- <view class="order-status hide" wx:else>{{order.statusText}}</view> -->

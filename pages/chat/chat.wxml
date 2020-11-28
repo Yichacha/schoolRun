@@ -23,7 +23,7 @@
               </view>
             </view>
             <view class="triangle"></view>
-            <image class="avatar" src="{{ myAvatarUrl }}"></image>
+            <image class="avatar" src="{{ myAvatarUrl }}" bindtap="getReceivedOrder"></image>
           </view>
         </view>
       </scroll-view>
@@ -39,7 +39,7 @@
       <view class="order_header">
         <image class="close" src="../../assets/images/close-1.png" bindtap="close"></image>
         选择一个订单
-        <text class="check_comment" bindtap="getComment">查看评价</text>
+        <text class="check_comment" wx:if="{{ showComment }}" bindtap="getComment">查看评价</text>
       </view>
       <scroll-view class="order_content" scroll-y="true">
         <radio-group bindchange="checkeOrder">
@@ -51,7 +51,9 @@
         </radio-group>
       </scroll-view>
       <view class="confirm_container">
-        <button bindtap="confirmReceive" class="confirmBtn">确认接单</button>
+        <button class="confirmBtn" wx:if="{{ showComment }}" bindtap="confirmReceive">确认接单</button>
+        <button class="accept_cancel" wx:if="{{ !showComment }}" bindtap="cancelOrder">取消</button>
+        <button class="accept_confirm" wx:if="{{ !showComment }}" bindtap="confirmOrder">确认订单</button>
       </view>
     </view>
   </view>
@@ -63,23 +65,9 @@
       </view>
       <scroll-view class="comment_content" scroll-y="true">
         <view class="comment_detail" wx:for="{{ commentList }}" wx:key="index">
-          {{item}}
-          评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价
-        </view>
-        <view class="comment_detail">
-          评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价评价
+          {{item.content}}
         </view>
       </scroll-view>
-    </view>
-  </view>
-  <view class="accept_container" wx:if="{{ acceptOrder }}">
-    <view class="accept">
-      <view class="accept_header">{{}}请求接您的订单</view>
-      <view class="accept_content">{{}}啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</view>
-      <view class="accept_operate">
-        <button class="accept_cancel" bindtap="handle_cancel">取消</button>
-        <button class="accept_confirm" bindtap="handle_confirm">确认订单</button>
-      </view>
     </view>
   </view>
 </view>

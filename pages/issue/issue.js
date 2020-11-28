@@ -121,7 +121,6 @@ Page({
       })
     } else {
       let header = {
-        'Authorization': getToken(app.globalData.token),
         'Content-Type': 'application/x-www-form-urlencoded'
       }
       const { data: res } = await sendApi(this.data.issue, header)

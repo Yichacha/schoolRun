@@ -157,6 +157,8 @@
   height: calc(100% - 230rpx);
 }
 .chat .order_container .order .confirm_container {
+  display: flex;
+  justify-content: space-around;
   background-color: #FFFFFF;
   padding: 20rpx 0;
 }
@@ -187,19 +189,22 @@
   right: 0;
   width: 44rpx;
 }
-.chat .order_container .order .confirm_container .confirmBtn {
-  width: 420rpx;
+.chat .order_container .order .confirm_container button {
+  width: 206rpx;
   height: 86rpx;
-  color: #FFFFFF;
+  border-style: none;
+  border-radius: 66rpx;
   background-color: #FCA44B;
-  border-radius: 54rpx;
-  font: 500 36rpx 'Segoe UI';
+  color: #FFFFFF;
+  font: 36rpx PingFangSC-Regular;
   line-height: 86rpx;
 }
-/* .chat .order_container .order .order_content .radio.selected {
-  border: none;
-  background: red;
-} */
+.chat .order_container .order .confirm_container .confirmBtn {
+  width: 420rpx;
+  color: #FFFFFF;
+  font: 500 36rpx 'Segoe UI';
+  line-height: 86rpx; /* line-height 只有在 font 之后才生效 */
+}
 
 /* 评价弹窗 */
 .chat .comment_container .comment .comment_content .comment_detail {
@@ -210,44 +215,4 @@
   color: #666666;
   font: 28rpx PingFangSC-Regular;
   line-height: 46rpx;
-}
-
-
-/* 确认订单弹窗 */
-.chat .accept_container .accept {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FFFFFF;
-  border-top: 12rpx solid #F7CBAE;
-  border-radius: 44rpx;
-  width: 672rpx;
-  color: #555555;
-  font: 32rpx Source Han Sans CN;
-}
-.chat .accept_container .accept view {
-  margin: 40rpx 30rpx;
-}
-.chat .accept_container .accept .accept_content {
-  background-color: #FFF8F1;
-  border-radius: 16rpx;
-  height: 204rpx;
-  overflow: auto;
-  padding: 14rpx 22rpx;
-}
-.chat .accept_container .accept .accept_operate {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 100rpx;
-}
-.chat .accept_container .accept .accept_operate button {
-  width: 206rpx;
-  height: 76rpx;
-  border-style: none;
-  border-radius: 66rpx;
-  background-color: #FCC39E;
-  color: #FFFFFF;
-  font: 36rpx PingFangSC-Regular;
-  line-height: 76rpx;
 }
