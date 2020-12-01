@@ -78,7 +78,7 @@ Page({
     this.getCode()
   },
   async getCode() {
-    const res = await getCodeApi({}, {}, 'arraybuffer')
+    const res = await getCodeApi('arraybuffer')
     console.log('获取验证码成功 :>>', res)
     let base64 = wx.arrayBufferToBase64(res.data)
     this.setData({

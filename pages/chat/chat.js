@@ -209,12 +209,13 @@ Page({
   // 获取跑腿者已接单的订单
   async getReceivedOrder() {
     const { data: res } = await getReceivedOrderApi(this.data.options.toUserId, this.data.header)
-    res.orderList.map(item => item.status = -1)
     console.log(res)
+    let data = JSON.parse(JSON.stringify(res.orderList).replace(/username/g,"employerName"))
+    data.map(item => item.status = -1)
     if(res.code === 1) {
       console.log('获取订单列表', res)
       this.setData({
-        orderList: res.orderList,
+        orderList: data,
         bindAvatar: true
       })
     }
